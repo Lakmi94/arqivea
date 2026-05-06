@@ -1,35 +1,94 @@
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Heading, Text, Image, Flex } from "@chakra-ui/react";
 
 interface ArtworkCardProps {
   title: string;
   description: string;
-  key: number;
+  imageUrl?: string;
+  recommendationTag: string | undefined;
+  museum: string;
+  room: string;
+  medium: string;
+
 }
 
 export default function ArtworkCard({
   title,
   description,
-  key,
+  imageUrl,
+  recommendationTag,
+  museum,
+  room,
+  medium
 }: ArtworkCardProps) {
   return (
     <Box
-      key={key}
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
-      bg="white"
+      bg="brand.surface"
       shadow="sm"
       _hover={{ shadow: "md" }}
       transition="shadow 0.2s">
-      <Box h="48" bg="gray.200" />
-      <Box p="5">
-        <Heading as="h3" size="md" mb="2">
-          {title}
-        </Heading>
-        <Text color="gray.600" fontSize="sm">
-          {description}
-        </Text>
-      </Box>
+      {imageUrl ? (
+        <Image
+          src={`./images/${imageUrl}`}
+          alt={title}
+          h={80}
+          w="full"
+          objectFit="cover"
+        />
+      ) : (
+        <Box h="48" bg="brand.placeholder" />
+      )}
+      <Flex
+        direction="row"
+        alignItems={"center"}
+        justifyContent={"space-between"}
+        p="4"
+        borderBottomWidth="1px"
+        borderBottomColor="brand.border">
+        <Box>
+          <Heading as="h3" size="md" mb="2">
+            {title}
+          </Heading>
+          <Text color="brand.muted" fontSize="sm">
+            {description}
+          </Text>
+        </Box>
+        <Box
+          borderWidth="1px"
+          borderBlockColor="brand.border"
+          borderRadius="md"
+          p="2">
+          <Text>{recommendationTag}</Text>
+        </Box>
+      </Flex>
+      <Flex direction="column" p="2">
+        <Flex p="2" justifyContent="space-between" alignItems="center">
+          <Text fontSize="sm" color="brand.lightMuted">
+            Museum
+          </Text>
+          <Text fontSize="sm" color="brand.lightMuted">
+            {museum}
+          </Text>
+        </Flex>
+        <Flex p="2" justifyContent="space-between" alignItems="center">
+          <Text fontSize="sm" color="brand.lightMuted">
+            Room
+          </Text>
+          <Text fontSize="sm" color="brand.lightMuted">
+            {room}
+          </Text>
+        </Flex>
+        <Flex p="2" justifyContent="space-between" alignItems="center">
+          <Text fontSize="sm" color="brand.lightMuted">
+          Medium
+          </Text>
+          <Text fontSize="sm" color="brand.lightMuted">
+            {medium}
+          </Text>
+        </Flex>
+      </Flex>
     </Box>
   );
 }
