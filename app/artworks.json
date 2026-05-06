@@ -1,0 +1,173 @@
+{
+  "artworks": [
+    {
+      "id": "art_001",
+      "title": "Saint Catherine of Alexandria",
+      "artist": "Caravaggio (Michelangelo Merisi)",
+      "museum": "Museo Nacional Thyssen-Bornemisza",
+      "room": "Room 6",
+      "medium": "Oil on canvas",
+      "displayStatus": "On display",
+      "recommendationTag": "Must see!", 
+      "image": 
+    },
+    {
+      "id": "art_002",
+      "title": "The Garden of Earthly Delights Triptych",
+      "artist": "Hieronymus Bosch",
+      "museum": "Museo Nacional del Prado",
+      "room": "Room 056A",
+      "medium": "Oil on oak panel",
+      "displayStatus": "On display",
+      "recommendationTag": "Recommended"
+    },
+    {
+      "id": "art_003",
+      "title": "Bust of a Young Woman",
+      "artist": "Pablo Picasso",
+      "museum": "Museo Reina Sofía",
+      "room": "Room 8, Floor 2",
+      "medium": "Oil on canvas",
+      "displayStatus": "On display",
+      "recommendationTag": "Must see!"
+    },
+    {
+      "id": "art_004",
+      "title": "The West Façade of the Church of Saint Mary in Utrecht",
+      "artist": "Pieter Jansz. Saenredam",
+      "museum": "Museo Nacional Thyssen-Bornemisza",
+      "room": "Room 26",
+      "medium": "Oil on panel",
+      "displayStatus": "Not on display",
+      "recommendationTag": "Recommended"
+    },
+    {
+      "id": "art_005",
+      "title": "S/T (Apocalypse)",
+      "artist": "Gadea, Patricia",
+      "museum": "Museo Reina Sofía",
+      "room": "Room E, Floor 3",
+      "medium": "Pencil, marker and tempera on paper",
+      "displayStatus": "On display",
+      "recommendationTag": "Must see!"
+    },
+    {
+      "id": "art_006",
+      "title": "Woman in Bath",
+      "artist": "Roy Lichtenstein",
+      "museum": "Museo Nacional Thyssen-Bornemisza",
+      "room": "Room 52",
+      "medium": "Oil on canvas",
+      "displayStatus": "On display",
+      "recommendationTag": "Must see!"
+    },
+    {
+      "id": "art_007",
+      "title": "The Guadarrama",
+      "artist": "Aureliano de Beruete",
+      "museum": "Museo Nacional del Prado",
+      "room": "Not on display",
+      "medium": "Oil on canvas",
+      "displayStatus": "Not on display",
+      "recommendationTag": null
+    },
+    {
+      "id": "art_008",
+      "title": "Boys on the Beach",
+      "artist": "Joaquín Sorolla y Bastida",
+      "museum": "Museo Nacional del Prado",
+      "room": "Room 060A",
+      "medium": "Oil on canvas",
+      "displayStatus": "On display",
+      "recommendationTag": "Recommended",
+      "accessionNumber": "P004648",
+      "year": "1909",
+      "dimensions": "118 x 185 cm",
+      "tags": ["Spain", "Modern", "Ocean", "Oil", "Canvas", "Painting"],
+      "academicNotes": "The series of paintings featuring the ‘children in the water’ motif culminates in this work, in which nude boys play a greater part in the composition than in other pictures by Sorolla. While it is signed in 1910 and this chronology has been followed by almost everyone, the artist must have painted it in the summer of 1909, as the image was already reproduced in a book by Rafael Doménech the colophon of which states that it was printed on 19 December 1909. The work would thus coincide with Sorolla’s long and fruitful three-month stay in Valencia between late June and late September. During those months he painted various masterworks, including The Horse’s Bath. Both paintings reveal an essential Mediterranean fascination that the painter sought to emphasise with frames bearing Tuscan pilasters and smooth entablatures. The motif of nude children lying freely in the sun had already interested Mariano Fortuny and Ignacio Pinazo, as well as Sargent, all three artists appreciated by Sorolla. Like Fortuny, Sorolla approached the subject at the sea’s edge, very much in the foreground and without any horizon. Unlike the former painter, though, Sorolla showed an interest in the movement of the water, which he turned into a purely pictorial motif, along with the light reflecting off the sea and the boys’ bodies, their reflection in the water and the coloured shadows cast onto the wet surface. The painter had dealt with this subject in other works related to the one at the Prado by the presence of nude children lying in the foreground. As early as 1903 he painted Children on the Seashore, but this composition shows younger children, making the figures in the present picture more akin to the nude youths that appear in various works from 1908, including Sea Idyll, Idyll on the Sand, and Boys on the Beach as well as the reclining nudes in two works with broader compositions, one in the Hispanic Society and the other in a private collection. There are also various drawings of children in horizontal poses which are thought to have served as preparatory studies for this painting, but which cannot be specifically related to it. Additionally, in 1916 the artist painted another picture called Children on the Beach, Valencia, with a nude lying on the sea’s edge. Despite the size of this canvas, the artist painted it from the life. All the same, he managed to set the scene without any previous studies, achieving not only a feeling of immediate veracity but also a composition that perfectly balances the static posture of the bodies and the dynamism of their relative placement. Indeed, the scene shows the boy with his head most raised in the foreground. His diagonal position draws the viewer into the canvas and his turned face carries our gaze back to the second boy until it comes to rest on the abandoned posture of the third one, who lies parallel to the canvas’s upper edge. The gradually increasing degree of relaxation in the boys’ postures according to their distance from the viewer is paralleled by a growing chromatic intensity in their bodies, from the white flesh with mauve reflections of the nearest boy, with blond hair and lighter skin, to the reddish-bronze of the one in the background, passing through the tanned shades of the second, with brown hair. The highlights indicate the growing intensity with which the sun shines on the bodies being gradually submerged in the water. Thus, on the closest and driest boy the highlights are rendered with matte white impastos; on the second, who is partially submerged, they are more intense and lighter; and on the boy in the background, who is already soaked and completely shiny, they become very luminous. The artist also captures the movement of the water around their bodies, using very broad brushstrokes with turquoise, blue, violet and mauve tones, just as he had done in earlier works featuring swimmers, especially in his Jávea cycle from 1905. As in Sea Idyll, he also reflects the small hollow that the undertow creates near the feet of the central figure. Of special interest is the double silhouette cast by the figures of the first two boys (it is less visible in the third one). Their lower silhouettes correspond to their reflections on the water, while the ones directly below their bodies are their shadows, coloured in a shade of violet, which the artist observed under Valencia’s intense midday sun."
+    },
+    {
+      "id": "art_009",
+      "title": "Woman in Blue",
+      "artist": "Pablo Picasso",
+      "museum": "Museo Reina Sofía",
+      "room": "Not on display",
+      "medium": "Oil on canvas",
+      "displayStatus": "Not on display",
+      "recommendationTag": null
+    },
+    {
+      "id": "art_010",
+      "title": "La gitana de las granadas",
+      "artist": "Hermenegildo Anglada Camarasa",
+      "museum": "Museo Reina Sofía",
+      "room": "Room E, Floor 3",
+      "medium": "Oil on canvas",
+      "displayStatus": "On display",
+      "recommendationTag": "Recommended",
+      "accessionNumber": "AS00621",
+      "year": "1904",
+      "dimensions": "194.5 x 191.5 cm",
+      "tags": ["Spain", "Modern", "Woman", "Oil", "Canvas", "Painting"],
+      "academicNotes": "The cycle of decadent and folkloric paintings by Hermenegildo Anglada Camarasa reaches a mesmerizing peak in his monumental oil-on-canvas work, La gitana de las granadas (The Gypsy of the Pomegranates), painted circa 1904. Currently housed in the Museo Nacional Centro de Arte Reina Sofía in Madrid, this masterpiece was created during the artist’s most fruitful and internationally celebrated years in Paris. During this period, Anglada Camarasa became one of the wealthiest and most famous painters in Europe, earning the admiration of contemporaries like Gustav Klimt. The painting stands as a quintessential example of Spanish Modernismo heavily infused with Post-Impressionist and early Fauvist aesthetics, vividly merging a traditional Spanish folkloric motif with the vibrant, artificial edge of the international avant-garde. \n\n The composition centers on an enigmatic young woman draped in a luminous, flowing white dress, reclining languidly in the foreground against a rich, symbolic bed of split pomegranates. These vivid fruits are not merely decorative elements; they carry profound mythological weight as ancient symbols of fertility and the underworld. This perfectly aligns with the turn-of-the-century Decadent movement's deep fascination with the fatalistic femme fatale and the intertwined duality of love and death (Eros and Thanatos). \n\n Unlike the sun-drenched realism of his Spanish contemporaries like Joaquín Sorolla, Anglada Camarasa crafts a scene that feels entirely nocturnal, claustrophobic, and highly psychological. He draws the observer directly into the intense, almost predatory gaze of the woman's dark, almond-shaped eyes. From there, the viewer's gaze is deliberately pulled down through the serpentine, undulating curves of her dress until it rests on the scattered pomegranates. This visual journey is paralleled by a dramatic and growing chromatic intensity that shifts from the pale, spectral whites and sickly greens of the central figure to the explosive, reddish-crimson tones of the fruit. \n\nThe artist captures this heavy, sensual atmosphere using very broad, thick brushstrokes—a heavy impasto technique that critics of the era famously described as glowing with \"sulfur and phosphorus.\" Ultimately, by dissolving the strict anatomical boundaries of the figure so that her white dress bleeds seamlessly into the chaotic background, Anglada Camarasa prioritizes pure color, tactile texture, and raw emotional weight over academic realism. He reflects a modern world driven by artificial electric light, bohemian nightlife, and deep psychological contrast."
+    },
+    {
+      "id": "art_011",
+      "title": "The terminus cross",
+      "artist": "Santiago Rusiñol",
+      "museum": "Museo Nacional Thyssen-Bornemisza",
+      "room": "Not on display",
+      "medium": "Oil on canvas",
+      "displayStatus": "Not on display",
+      "recommendationTag": null
+    },
+    {
+      "id": "art_012",
+      "title": "The Jockeys",
+      "artist": "Henri de Toulouse-Lautrec",
+      "museum": "Museo Nacional Thyssen-Bornemisza",
+      "room": "Room F",
+      "medium": "Oil on canvas",
+      "displayStatus": "On display",
+      "recommendationTag": "Must see!",
+      "accessionNumber": "CTB.1998.17",
+      "year": "1882",
+      "dimensions": "64.5 x 45 cm",
+      "tags": ["Spain", "Modern", "Horses", "Oil", "Canvas", "Painting"],
+      "academicNotes": "The early artistic output of Henri de Toulouse-Lautrec—created before his legendary immersion into the bohemian nightlife of Montmartre—is brilliantly encapsulated in The Jockeys (circa 1882). This dynamic oil-on-canvas work, housed in the Museo Nacional Thyssen-Bornemisza, represents a crucial foundational era for the artist. Born into an aristocratic French family where horsemanship was a deeply ingrained tradition, the young Lautrec was expected to become an avid rider. However, after tragically breaking both of his femurs in his early teens—a condition that stunted his leg growth and permanently prevented him from riding—he was forced to channel his intense equestrian obsession entirely into his art. Studying under the renowned sporting painter René Princeteau, a close friend of his father, Lautrec’s precocious teenage years were completely dominated by the motif of the horse.\n\nThis specific painting stands as a culminating masterpiece of that formative period, capturing a breathtaking sense of kinetic energy and immediacy. Unlike the heavily structured, stiff academic racing scenes of his predecessors, Lautrec approaches the subject with raw, chaotic momentum. The composition centers on a group of \"gentleman-jockeys\" mounted on curiously elongated, muscular steeds, caught in the tense, frantic moments of a race. The presence of a brown dog running freely alongside the horses' hooves suggests that this is an informal, gentlemanly country race-meeting rather than a highly regulated, elite event at a famous metropolitan track like Longchamp. Lautrec masterfully draws the viewer's eye directly to the center of the action by using sudden, highly saturated splashes of color—specifically the vivid red and blue of the central jockeys' racing silks. These bright tones act as visual anchors, contrasting sharply against the dark, powerful bodies of the animals and the muted, earthy tones of the dirt track. What truly elevates this composition is Lautrec’s highly advanced handling of light, atmosphere, and brushwork. The scene is set beneath a highly charged, dramatic sky heavy with threatening rain clouds, which produces a striking contre-jour (back-lit) effect. This dramatic lighting throws the long, dark shadows of the horses forward, pulling them directly out toward the spectator's physical space and firmly grounding the action of the scene. Furthermore, Lautrec completely abandons the smooth, blended realism of traditional 19th-century sporting art. Instead, he utilizes a skein of short, rapid, and staccato brushstrokes. This freely applied technique not only perfectly captures the raw physical power, sweat, and movement of the animals but also hints at the energetic, post-impressionistic style he was rapidly developing.\n\nUltimately, The Jockeys is a poignant turning point in Lautrec’s career. Shortly after this period, his equestrian paintings dramatically decreased as he moved to Paris, discovered the vibrant world of Montmartre, and shifted his artistic lens completely toward the indoor, artificial glow of cabarets, singers, and marginalized figures. In the bottom right corner of the canvas, viewers can spot Lautrec's early, stylized signature, painted long before he adopted his famous, minimalist circular monogram. Because this piece completely predates his iconic poster style, it serves as a brilliant bridge within Madrid's museum circuit, allowing explorers to see exactly how a young artist evolved from painting traditional aristocratic subjects into becoming one of the most radical and observant figures of modern art."
+    },
+    {
+      "id": "art_013",
+      "title": "Figure in a window",
+      "artist": "Unknown/Various",
+      "museum": "Museo Reina Sofía",
+      "room": "Not specified",
+      "medium": "Unknown",
+      "displayStatus": "Unknown",
+      "recommendationTag": null,
+      "tags": ["Spain", "Modern"]
+    },
+    {
+      "id": "art_014",
+      "title": "Man with a Clarinet",
+      "artist": "Unknown/Various",
+      "museum": "Museo Nacional Thyssen-Bornemisza",
+      "room": "Not specified",
+      "medium": "Unknown",
+      "displayStatus": "Unknown",
+      "recommendationTag": null,
+      "tags": ["Spain", "Modern"]
+    },
+    {
+      "id": "art_015",
+      "title": "The communicant",
+      "artist": "Unknown/Various",
+      "museum": "Museo Reina Sofía",
+      "room": "Not specified",
+      "medium": "Unknown",
+      "displayStatus": "Unknown",
+      "recommendationTag": null,
+      "tags": ["Spain", "Modern"]
+    }
+  ]
+}
