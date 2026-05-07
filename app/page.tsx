@@ -54,7 +54,6 @@ export default function Home() {
   console.log("appliedSearchQuery", appliedSearchQuery);
 
   const flatFilters = Object.values(selectedFilters).flat();
-  const concatenatedFilters = appliedFilters.join(", ");
 
   const isSpainAndModern =
     appliedFilters.length === 2 &&
