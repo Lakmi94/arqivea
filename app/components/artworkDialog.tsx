@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Box, Text, Image, Flex, Dialog, Button, Icon, ScrollArea } from "@chakra-ui/react";
 import { IoClose } from "react-icons/io5";
 import { ArtworkCardProps } from "./artworkCard";
@@ -12,29 +11,33 @@ import { GrLocation } from "react-icons/gr";
 import { IoColorPaletteSharp } from "react-icons/io5";
 import { TbRuler2 } from "react-icons/tb";
 import { IoCalendarNumberOutline } from "react-icons/io5";
+import { useRoutePlanner } from "../context/RoutePlannerContext";
 
 interface ArtworkDialogProps extends ArtworkCardProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export default function ArtworkDialog({
-  isOpen,
-  onClose,
-  title,
-  academicNotes,
-  imageUrl,
-  recommendationTag,
-  museum,
-  room,
-  medium,
-  artist,
-  accessionNumber,
-  year,
-  dimensions,
-  tags,
-}: ArtworkDialogProps) {
-  const [isAddedToRoute, setIsAddedToRoute] = useState(false);
+export default function ArtworkDialog(props: ArtworkDialogProps) {
+  const {
+    isOpen,
+    onClose,
+    title,
+    academicNotes,
+    imageUrl,
+    recommendationTag,
+    museum,
+    room,
+    medium,
+    artist,
+    accessionNumber,
+    year,
+    dimensions,
+    tags,
+  } = props;
+
+  const { toggleSavedArtwork, isArtworkSaved } = useRoutePlanner();
+  const isAddedToRoute = isArtworkSaved(title);
 
   return (
     <Dialog.Root
@@ -73,7 +76,7 @@ export default function ArtworkDialog({
               fontWeight="bold"
               color="gray.800"
               shadow="sm"
-              onClick={() => setIsAddedToRoute(!isAddedToRoute)}>
+              onClick={() => toggleSavedArtwork(props)}>
               <Icon
                 as={isAddedToRoute ? IoCheckmark : CiBookmark}
                 boxSize="4"
@@ -104,13 +107,16 @@ export default function ArtworkDialog({
               <Text fontWeight="bold">Tags</Text>
               <Flex wrap="wrap" gap={2}>
                 {tags?.map((tag) => (
-                  <Button
+                  <Box
                     key={tag}
-                    size="xs"
-                    variant="outline"
-                    borderColor="brand.border">
+                    fontSize="xs"
+                    borderWidth="1px"
+                    borderColor="brand.border"
+                    borderRadius="md"
+                    px="2"
+                    py="1">
                     {tag}
-                  </Button>
+                  </Box>
                 ))}
               </Flex>
             </Flex>
