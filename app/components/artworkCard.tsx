@@ -12,12 +12,12 @@ export interface ArtworkCardProps {
   museum: string;
   room: string;
   medium: string;
-
+  displayStatus?: string;
 }
 
 export default function ArtworkCard(props: ArtworkCardProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const { title, description, imageUrl, recommendationTag, museum, room, medium } = props;
+  const { title, description, imageUrl, recommendationTag, museum, room, medium, displayStatus } = props;
 
   return (
     <>
@@ -31,17 +31,37 @@ export default function ArtworkCard(props: ArtworkCardProps) {
       onClick={() => setIsDialogOpen(true)}
       _hover={{ shadow: "md" }}
       transition="shadow 0.2s">
-      {imageUrl ? (
-        <Image
-          src={`./images/${imageUrl}`}
-          alt={title}
-          h={80}
-          w="full"
-          objectFit="cover"
-        />
-      ) : (
-        <Box h="48" bg="brand.placeholder" />
-      )}
+      <Box position="relative">
+        {imageUrl ? (
+          <Image
+            src={`./images/${imageUrl}`}
+            alt={title}
+            h={80}
+            w="full"
+            objectFit="cover"
+          />
+        ) : (
+          <Box h="48" bg="brand.placeholder" />
+        )}
+        {displayStatus && (
+          <Box
+            position="absolute"
+            top="3"
+            left="3"
+            bg="whiteAlpha.900"
+            backdropFilter="blur(4px)"
+            px="2"
+            py="1"
+            borderRadius="md"
+            fontSize="xs"
+            fontWeight="bold"
+            color="gray.800"
+            shadow="sm"
+          >
+            {displayStatus}
+          </Box>
+        )}
+      </Box>
       <Flex
         direction="row"
         alignItems={"center"}

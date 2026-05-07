@@ -39,7 +39,7 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [appliedSearchQuery, setAppliedSearchQuery] = useState("");
   const { selectedFilters, showResults, setShowResults, appliedFilters, setAppliedFilters, clearFilters } = useFilters();
-  console.log("selectedFilters", selectedFilters);
+  console.log("appliedSearchQuery", appliedSearchQuery);
 
   const flatFilters = Object.values(selectedFilters).flat();
   const concatenatedFilters = appliedFilters.join(", ");
@@ -50,6 +50,12 @@ export default function Home() {
     appliedFilters.includes("Modern");
 
   const isSpanishModernSearch = appliedSearchQuery.toLowerCase().trim() === "spanish modernism";
+
+  const spainAndModernArtworks = artworksData.artworks
+    .filter((artwork) => {
+      const artworkText = JSON.stringify(artwork).toLowerCase();
+      return artworkText.includes("spain") && artworkText.includes("modern");
+    });
 
   useEffect(() => {
     fetch("/artworks.json")
@@ -68,7 +74,6 @@ export default function Home() {
   }, [flatFilters.length, appliedFilters.length, appliedSearchQuery, setAppliedFilters, setShowResults]);
 
   const handleSearch = () => {
-    console.log("Search term entered:", searchQuery);
     setAppliedSearchQuery(searchQuery);
     clearFilters(); // Clears active filters when running a search
     setShowResults(true);
@@ -114,7 +119,13 @@ export default function Home() {
           border="none"
           _focus={{ border: "none", boxShadow: "none", outline: "none" }}
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={(e) => {
+            const newValue = e.target.value;
+            if (newValue.length < searchQuery.length) {
+              setAppliedSearchQuery(newValue);
+            }
+            setSearchQuery(newValue);
+          }}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               handleSearch();
@@ -190,6 +201,7 @@ export default function Home() {
                     museum={artwork.museum}
                     room={artwork.room}
                     medium={artwork.medium}
+                    displayStatus={artwork.displayStatus}
                   />
                 ),
             )}
@@ -198,7 +210,7 @@ export default function Home() {
       ) : isSpainAndModern || isSpanishModernSearch ? (
         <Flex direction="column" w="full" align="center">
       
-          
+            <Text>{`${spainAndModernArtworks.length} results found for "Spain" + "Modernism"`}</Text>
           <SimpleGrid
             columns={{ base: 1, md: 2, lg: 3 }}
             gap={6}
@@ -206,12 +218,7 @@ export default function Home() {
             w="full"
             maxW="6xl"
             position={"relative"}>
-            {artworksData.artworks
-              .filter((artwork) => {
-                const artworkText = JSON.stringify(artwork).toLowerCase();
-                return artworkText.includes("spain") && artworkText.includes("modern");
-              })
-              .map((artwork) => (
+            {spainAndModernArtworks.map((artwork) => (
                 <ArtworkCard
                   key={artwork.id}
                   title={artwork.title}
@@ -221,13 +228,18 @@ export default function Home() {
                   museum={artwork.museum}
                   room={artwork.room}
                   medium={artwork.medium}
+                  displayStatus={artwork.displayStatus}
                 />
               ))}
           </SimpleGrid>
         </Flex>
       ) : (
         <Flex mt="8">
-          <Text fontSize="md" color="brand.muted">No results found</Text>
+          <Text fontSize="md" color="brand.muted">
+            {appliedSearchQuery.trim().length > 0
+              ? `No results found for "${appliedSearchQuery}"`
+              : `No results found for ${appliedFilters.join(" + ")}`}
+          </Text>
         </Flex>
       )}
     </Flex>
