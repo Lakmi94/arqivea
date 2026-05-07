@@ -107,12 +107,16 @@ export default function Home() {
       bg="brand.bg"
       fontFamily="sans"
       color="brand.text">
-      <Heading as="h1" fontSize="3xl" fontWeight="bold" mt="4">
+        <Flex  direction="column"
+     >
+            <Heading as="h1" fontSize="3xl" fontWeight="bold" mt="4">
         Discovery
       </Heading>
       <Text mt="4" fontSize="lg" color="brand.muted">
         Hyper-search & Academic Gallery
       </Text>
+        </Flex>
+    
 
       <Flex
         mt="8"

@@ -43,7 +43,8 @@ export default function ArtworkDialog(props: ArtworkDialogProps) {
   const [showToast, setShowToast] = useState(false);
 
   const handleToggleRoutePlanner = () => {
-    toggleSavedArtwork(props);
+    const { isOpen, onClose, ...artworkProps } = props;
+    toggleSavedArtwork(artworkProps);
     if (!isAddedToRoute) {
       setShowToast(true);
       setTimeout(() => setShowToast(false), 3000);

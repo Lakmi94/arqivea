@@ -122,9 +122,9 @@ export default function ArtworkCard(props: ArtworkCardProps) {
     </Box>
 
     <ArtworkDialog
+      {...props}
       isOpen={isDialogOpen}
       onClose={() => setIsDialogOpen(false)}
-      {...props}
     />
     </>
   );
