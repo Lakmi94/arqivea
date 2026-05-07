@@ -25,10 +25,15 @@ interface Artwork {
   museum: string;
   room: string;
   medium: string;
-  displayStatus?: string;
+  displayStatus: string;
   recommendationTag?: string | null;
   imageUrl: string;
   homePage: boolean;
+  academicNotes: string;
+  accessionNumber: string;
+  year: string;
+  dimensions: string;
+  tags: string[];
 }
 
 export default function Home() {
@@ -38,7 +43,14 @@ export default function Home() {
   });
   const [searchQuery, setSearchQuery] = useState("");
   const [appliedSearchQuery, setAppliedSearchQuery] = useState("");
-  const { selectedFilters, showResults, setShowResults, appliedFilters, setAppliedFilters, clearFilters } = useFilters();
+  const {
+    selectedFilters,
+    showResults,
+    setShowResults,
+    appliedFilters,
+    setAppliedFilters,
+    clearFilters,
+  } = useFilters();
   console.log("appliedSearchQuery", appliedSearchQuery);
 
   const flatFilters = Object.values(selectedFilters).flat();
@@ -49,13 +61,15 @@ export default function Home() {
     appliedFilters.includes("Spain") &&
     appliedFilters.includes("Modern");
 
-  const isSpanishModernSearch = appliedSearchQuery.toLowerCase().trim() === "spanish modernism";
+  const isSpanishModernSearch =
+    appliedSearchQuery.toLowerCase().trim() === "spanish modernism";
 
   const spainAndModernArtworks = artworksData.artworks
     .filter((artwork) => {
       const artworkText = JSON.stringify(artwork).toLowerCase();
       return artworkText.includes("spain") && artworkText.includes("modern");
-    });
+    })
+    .slice(0, 6);
 
   useEffect(() => {
     fetch("/artworks.json")
@@ -71,7 +85,13 @@ export default function Home() {
         setShowResults(false);
       }
     }
-  }, [flatFilters.length, appliedFilters.length, appliedSearchQuery, setAppliedFilters, setShowResults]);
+  }, [
+    flatFilters.length,
+    appliedFilters.length,
+    appliedSearchQuery,
+    setAppliedFilters,
+    setShowResults,
+  ]);
 
   const handleSearch = () => {
     setAppliedSearchQuery(searchQuery);
@@ -140,9 +160,9 @@ export default function Home() {
             variant="outline"
             borderColor="brand.border"
             onClick={handleSearch}>
-               <Icon size="lg" color="">
-          <CiSearch />
-        </Icon>
+            <Icon size="lg" color="">
+              <CiSearch />
+            </Icon>
             Search
           </Button>
         )}
@@ -154,9 +174,9 @@ export default function Home() {
           _hover={{ bg: "brand.primaryHover" }}
           transition="colors 0.2s"
           onClick={() => setShowFilters(!showFilters)}>
-              <Icon size="lg" color="">
-          <IoFilterOutline />
-        </Icon>
+          <Icon size="lg" color="">
+            <IoFilterOutline />
+          </Icon>
           Filters
         </Button>
       </Flex>
@@ -179,7 +199,8 @@ export default function Home() {
           />
         </Box>
       )}
-      {!showResults || (appliedFilters.length === 0 && appliedSearchQuery.trim() === "") ? (
+      {!showResults ||
+      (appliedFilters.length === 0 && appliedSearchQuery.trim() === "") ? (
         <Flex direction={"column"}>
           <Text>Recommended artwork</Text>
           <SimpleGrid
@@ -195,13 +216,18 @@ export default function Home() {
                   <ArtworkCard
                     key={artwork.id}
                     title={artwork.title}
-                    description={artwork.artist}
+                    artist={artwork.artist}
+                    academicNotes={artwork.academicNotes}
                     imageUrl={artwork.imageUrl}
                     recommendationTag={artwork.recommendationTag ?? undefined}
                     museum={artwork.museum}
                     room={artwork.room}
                     medium={artwork.medium}
                     displayStatus={artwork.displayStatus}
+                    accessionNumber={artwork.accessionNumber}
+                    year={artwork.year}
+                    dimensions={artwork.dimensions}
+                    tags={artwork.tags}
                   />
                 ),
             )}
@@ -209,8 +235,7 @@ export default function Home() {
         </Flex>
       ) : isSpainAndModern || isSpanishModernSearch ? (
         <Flex direction="column" w="full" align="center">
-      
-            <Text>{`${spainAndModernArtworks.length} results found for "Spain" + "Modernism"`}</Text>
+          <Text>{`${spainAndModernArtworks.length} results found for "Spain" + "Modernism"`}</Text>
           <SimpleGrid
             columns={{ base: 1, md: 2, lg: 3 }}
             gap={6}
@@ -219,18 +244,23 @@ export default function Home() {
             maxW="6xl"
             position={"relative"}>
             {spainAndModernArtworks.map((artwork) => (
-                <ArtworkCard
-                  key={artwork.id}
-                  title={artwork.title}
-                  description={artwork.artist}
-                  imageUrl={artwork.imageUrl}
-                  recommendationTag={artwork.recommendationTag ?? undefined}
-                  museum={artwork.museum}
-                  room={artwork.room}
-                  medium={artwork.medium}
-                  displayStatus={artwork.displayStatus}
-                />
-              ))}
+              <ArtworkCard
+                key={artwork.id}
+                title={artwork.title}
+                academicNotes={artwork.academicNotes}
+                imageUrl={artwork.imageUrl}
+                recommendationTag={artwork.recommendationTag ?? undefined}
+                museum={artwork.museum}
+                room={artwork.room}
+                artist={artwork.artist}
+                medium={artwork.medium}
+                displayStatus={artwork.displayStatus}
+                accessionNumber={artwork.accessionNumber}
+                year={artwork.year}
+                dimensions={artwork.dimensions}
+                tags={artwork.tags}
+              />
+            ))}
           </SimpleGrid>
         </Flex>
       ) : (

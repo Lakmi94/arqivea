@@ -6,18 +6,23 @@ import ArtworkDialog from "./artworkDialog";
 
 export interface ArtworkCardProps {
   title: string;
-  description: string;
+  artist: string;
+  academicNotes: string;
   imageUrl?: string;
   recommendationTag: string | undefined;
   museum: string;
   room: string;
   medium: string;
-  displayStatus?: string;
+  displayStatus: string;
+  accessionNumber: string;
+  year: string;
+  dimensions: string;
+  tags: string[];
 }
 
 export default function ArtworkCard(props: ArtworkCardProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const { title, description, imageUrl, recommendationTag, museum, room, medium, displayStatus } = props;
+  const { title, academicNotes, artist,imageUrl, recommendationTag, museum, room, medium, displayStatus } = props;
 
   return (
     <>
@@ -74,16 +79,19 @@ export default function ArtworkCard(props: ArtworkCardProps) {
             {title}
           </Heading>
           <Text color="brand.muted" fontSize="sm">
-            {description}
+            {artist}
           </Text>
         </Box>
-        <Box
-          borderWidth="1px"
-          borderBlockColor="brand.border"
-          borderRadius="md"
-          p="2">
-          <Text>{recommendationTag}</Text>
-        </Box>
+        {recommendationTag && (
+          <Box
+            borderWidth="1px"
+            borderBlockColor="brand.border"
+            borderRadius="md"
+            p="2">
+            <Text>{recommendationTag}</Text>
+          </Box>
+        )}
+         
       </Flex>
       <Flex direction="column" p="2">
         <Flex p="2" justifyContent="space-between" alignItems="center">
