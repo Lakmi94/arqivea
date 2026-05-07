@@ -12,9 +12,11 @@ import {
   Icon,
 } from "@chakra-ui/react";
 import { CiSearch } from "react-icons/ci";
+import { IoFilterOutline } from "react-icons/io5";
 
-import ArtworkCard from "../components/ui/artworkCard";
+import ArtworkCard from "./components/artworkCard";
 import Filters from "./components/filters";
+import { useFilters } from "./context/FilterContext";
 
 interface Artwork {
   id: string;
@@ -31,7 +33,23 @@ interface Artwork {
 
 export default function Home() {
   const [showFilters, setShowFilters] = useState(false);
-  const [artworksData, setArtworksData] = useState<{ artworks: Artwork[] }>({ artworks: [] });
+  const [artworksData, setArtworksData] = useState<{ artworks: Artwork[] }>({
+    artworks: [],
+  });
+  const [searchQuery, setSearchQuery] = useState("");
+  const [appliedSearchQuery, setAppliedSearchQuery] = useState("");
+  const { selectedFilters, showResults, setShowResults, appliedFilters, setAppliedFilters, clearFilters } = useFilters();
+  console.log("selectedFilters", selectedFilters);
+
+  const flatFilters = Object.values(selectedFilters).flat();
+  const concatenatedFilters = appliedFilters.join(", ");
+
+  const isSpainAndModern =
+    appliedFilters.length === 2 &&
+    appliedFilters.includes("Spain") &&
+    appliedFilters.includes("Modern");
+
+  const isSpanishModernSearch = appliedSearchQuery.toLowerCase().trim() === "spanish modernism";
 
   useEffect(() => {
     fetch("/artworks.json")
@@ -39,6 +57,22 @@ export default function Home() {
       .then((data) => setArtworksData(data))
       .catch((err) => console.error("Error fetching artworks:", err));
   }, []);
+
+  useEffect(() => {
+    if (flatFilters.length === 0 && appliedFilters.length > 0) {
+      setAppliedFilters([]);
+      if (appliedSearchQuery.trim() === "") {
+        setShowResults(false);
+      }
+    }
+  }, [flatFilters.length, appliedFilters.length, appliedSearchQuery, setAppliedFilters, setShowResults]);
+
+  const handleSearch = () => {
+    console.log("Search term entered:", searchQuery);
+    setAppliedSearchQuery(searchQuery);
+    clearFilters(); // Clears active filters when running a search
+    setShowResults(true);
+  };
 
   return (
     <Flex
@@ -72,14 +106,35 @@ export default function Home() {
           <CiSearch />
         </Icon>{" "}
         <Input
-        ml="-13px"
+          ml="-13px"
           id="search"
           type="text"
           placeholder="Search for artworks, artists, museums, or vibes..."
           flex="1"
           border="none"
           _focus={{ border: "none", boxShadow: "none", outline: "none" }}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
         />
+        {searchQuery.trim().length > 0 && (
+          <Button
+            px="6"
+            py="2"
+            mr="2"
+            variant="outline"
+            borderColor="brand.border"
+            onClick={handleSearch}>
+               <Icon size="lg" color="">
+          <CiSearch />
+        </Icon>
+            Search
+          </Button>
+        )}
         <Button
           px="6"
           py="2"
@@ -88,38 +143,93 @@ export default function Home() {
           _hover={{ bg: "brand.primaryHover" }}
           transition="colors 0.2s"
           onClick={() => setShowFilters(!showFilters)}>
+              <Icon size="lg" color="">
+          <IoFilterOutline />
+        </Icon>
           Filters
         </Button>
       </Flex>
       {showFilters && (
         <Box w="full" maxW="4xl" mt="4">
-          <Filters />
+          <Filters
+            onApply={() => {
+              setSearchQuery(""); // Clears search bar text
+              setAppliedSearchQuery(""); // Clears active search state
+              if (flatFilters.length > 0) {
+                setAppliedFilters(flatFilters);
+                setShowResults(true);
+              } else {
+                // If user applies zero filters, reset to the recommended view
+                setAppliedFilters([]);
+                setShowResults(false);
+              }
+              setShowFilters(false);
+            }}
+          />
         </Box>
       )}
-      <Text>Recommended artwork</Text>
-      <SimpleGrid
-        columns={{ base: 1, md: 2, lg: 3 }}
-        gap={6}
-        mt="12"
-        w="full"
-        maxW="6xl"
-        position={"relative"}>
-        {artworksData.artworks.map(
-          (artwork) =>
-            artwork.homePage === true && (
-              <ArtworkCard
-                key={artwork.id}
-                title={artwork.title}
-                description={artwork.artist}
-                imageUrl={artwork.imageUrl}
-                recommendationTag={artwork.recommendationTag ?? undefined}
-                museum={artwork.museum}
-                room={artwork.room}
-                medium={artwork.medium}
-              />
-            ),
-        )}
-      </SimpleGrid>
+      {!showResults || (appliedFilters.length === 0 && appliedSearchQuery.trim() === "") ? (
+        <Flex direction={"column"}>
+          <Text>Recommended artwork</Text>
+          <SimpleGrid
+            columns={{ base: 1, md: 2, lg: 3 }}
+            gap={6}
+            mt="12"
+            w="full"
+            maxW="6xl"
+            position={"relative"}>
+            {artworksData.artworks.map(
+              (artwork) =>
+                artwork.homePage === true && (
+                  <ArtworkCard
+                    key={artwork.id}
+                    title={artwork.title}
+                    description={artwork.artist}
+                    imageUrl={artwork.imageUrl}
+                    recommendationTag={artwork.recommendationTag ?? undefined}
+                    museum={artwork.museum}
+                    room={artwork.room}
+                    medium={artwork.medium}
+                  />
+                ),
+            )}
+          </SimpleGrid>
+        </Flex>
+      ) : isSpainAndModern || isSpanishModernSearch ? (
+        <Flex direction="column" w="full" align="center">
+      
+          
+          <SimpleGrid
+            columns={{ base: 1, md: 2, lg: 3 }}
+            gap={6}
+            mt="12"
+            w="full"
+            maxW="6xl"
+            position={"relative"}>
+            {artworksData.artworks
+              .filter((artwork) => {
+                const artworkText = JSON.stringify(artwork).toLowerCase();
+                return artworkText.includes("spain") && artworkText.includes("modern");
+              })
+              .map((artwork) => (
+                <ArtworkCard
+                  key={artwork.id}
+                  title={artwork.title}
+                  description={artwork.artist}
+                  imageUrl={artwork.imageUrl}
+                  recommendationTag={artwork.recommendationTag ?? undefined}
+                  museum={artwork.museum}
+                  room={artwork.room}
+                  medium={artwork.medium}
+                />
+              ))}
+          </SimpleGrid>
+        </Flex>
+      ) : (
+        <Flex mt="8">
+          <Text fontSize="md" color="brand.muted">No results found</Text>
+        </Flex>
+      )}
     </Flex>
   );
 }

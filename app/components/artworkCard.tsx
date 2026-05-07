@@ -1,6 +1,10 @@
-import { Box, Heading, Text, Image, Flex } from "@chakra-ui/react";
+"use client";
 
-interface ArtworkCardProps {
+import { useState } from "react";
+import { Box, Heading, Text, Image, Flex } from "@chakra-ui/react";
+import ArtworkDialog from "./artworkDialog";
+
+export interface ArtworkCardProps {
   title: string;
   description: string;
   imageUrl?: string;
@@ -11,22 +15,20 @@ interface ArtworkCardProps {
 
 }
 
-export default function ArtworkCard({
-  title,
-  description,
-  imageUrl,
-  recommendationTag,
-  museum,
-  room,
-  medium
-}: ArtworkCardProps) {
+export default function ArtworkCard(props: ArtworkCardProps) {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const { title, description, imageUrl, recommendationTag, museum, room, medium } = props;
+
   return (
+    <>
     <Box
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
       bg="brand.surface"
       shadow="sm"
+      cursor="pointer"
+      onClick={() => setIsDialogOpen(true)}
       _hover={{ shadow: "md" }}
       transition="shadow 0.2s">
       {imageUrl ? (
@@ -90,5 +92,12 @@ export default function ArtworkCard({
         </Flex>
       </Flex>
     </Box>
+
+    <ArtworkDialog
+      isOpen={isDialogOpen}
+      onClose={() => setIsDialogOpen(false)}
+      {...props}
+    />
+    </>
   );
 }

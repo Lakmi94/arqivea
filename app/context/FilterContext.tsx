@@ -8,34 +8,42 @@ interface FilterContextType {
   selectedFilters: FilterState;
   toggleFilter: (categoryId: string, option: string) => void;
   clearFilters: () => void;
+  showResults: boolean;
+  setShowResults: (val: boolean) => void;
+  appliedFilters: string[];
+  setAppliedFilters: (val: string[]) => void;
 }
 
 const FilterContext = createContext<FilterContextType | undefined>(undefined);
 
 export function FilterProvider({ children }: { children: ReactNode }) {
   const [selectedFilters, setSelectedFilters] = useState<FilterState>({});
+  const [showResults, setShowResults] = useState(false);
+  const [appliedFilters, setAppliedFilters] = useState<string[]>([]);
 
   const toggleFilter = (categoryId: string, option: string) => {
-    setSelectedFilters((prev) => {
-      const currentCategory = prev[categoryId] || [];
-      const isSelected = currentCategory.includes(option);
-      const newCategory = isSelected
-        ? currentCategory.filter((item) => item !== option)
-        : [...currentCategory, option];
+    const currentCategory = selectedFilters[categoryId] || [];
+    const isSelected = currentCategory.includes(option);
+    const newCategory = isSelected
+      ? currentCategory.filter((item) => item !== option)
+      : [...currentCategory, option];
 
-      return {
-        ...prev,
-        [categoryId]: newCategory,
-      };
-    });
+    const newFilters = {
+      ...selectedFilters,
+      [categoryId]: newCategory,
+    };
+
+    setSelectedFilters(newFilters);
   };
 
   const clearFilters = () => {
     setSelectedFilters({});
+    setShowResults(false);
+    setAppliedFilters([]);
   };
 
   return (
-    <FilterContext.Provider value={{ selectedFilters, toggleFilter, clearFilters }}>
+    <FilterContext.Provider value={{ selectedFilters, toggleFilter, clearFilters, showResults, setShowResults, appliedFilters, setAppliedFilters }}>
       {children}
     </FilterContext.Provider>
   );

@@ -4,9 +4,14 @@ import { Flex, Box, Text, Button } from "@chakra-ui/react";
 import filtersData from "../filters.json";
 import { useFilters } from "../context/FilterContext";
 
-export default function Filters() {
+interface FiltersProps {
+  onApply?: () => void;
+}
+
+export default function Filters({ onApply }: FiltersProps) {
   const { selectedFilters, toggleFilter, clearFilters } = useFilters();
   const totalSelectedCount = Object.values(selectedFilters).flat().length;
+  const showButtons = totalSelectedCount > 0;
 
   return (
     <Flex
@@ -49,31 +54,37 @@ export default function Filters() {
           </Box>
         ))}
       </Flex>
-      {Object.values(selectedFilters).some((arr) => arr.length > 0) && (
+      {showButtons && (
         <Flex alignItems={"flex-end"} pt="2" ml='-80px'>
-          <Button
-            size="sm"
-            mr="10px"
-            onClick={clearFilters}
-            bg="brand.surface"
-            borderWidth="1px"
-            borderColor="brand.border"
-            color="brand.text"
-            _hover={{ bg: "brand.placeholder" }}>
-            Clear all filters
-          </Button>
-
-          <Button
-            size="sm"
-            onClick={clearFilters}
-            bg="brand.surface"
-            borderWidth="1px"
-            borderColor="brand.border"
-            color="brand.text"
-            _hover={{ bg: "brand.placeholder" }}>
-            Apply ({totalSelectedCount}) filters
-          </Button>
-        </Flex>
+          {totalSelectedCount > 0 && (
+             <Button
+               size="sm"
+               mr="10px"
+               onClick={clearFilters}
+               bg="brand.surface"
+               borderWidth="1px"
+               borderColor="brand.border"
+               color="brand.text"
+               _hover={{ bg: "brand.placeholder" }}>
+               Clear all filters
+             </Button>
+          )}
+          
+            <Button
+              size="sm"
+              onClick={() => {
+                if (onApply) {
+                  onApply();
+                }
+              }}
+              bg="brand.surface"
+              borderWidth="1px"
+              borderColor="brand.border"
+              color="brand.text"
+              _hover={{ bg: "brand.placeholder" }}>
+              Apply ({totalSelectedCount}) filters
+            </Button>
+          </Flex>
       )}
     </Flex>
   );
