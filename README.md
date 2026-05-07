@@ -32,6 +32,25 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Project Structure
+
+```text
+arqivea/
+├── app/
+│   ├── components/       # Reusable UI components (ArtworkCard, ArtworkDialog, Filters, Header)
+│   ├── context/          # React Context providers (FilterContext, RoutePlannerContext)
+│   ├── discovery/        # Discovery page component
+│   ├── layout.tsx        # Next.js root layout
+│   ├── page.tsx          # Main entry point / Discovery page
+│   ├── provider.tsx      # Global state and theme providers
+│   └── filters.json      # Filter options data
+├── public/
+│   ├── artworks.json     # Mock database of artworks
+│   └── images/           # Artwork image assets
+├── README.md
+└── package.json
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
