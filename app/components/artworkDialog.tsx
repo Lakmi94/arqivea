@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Box, Text, Image, Flex, Dialog, Button, Icon, ScrollArea } from "@chakra-ui/react";
 import { IoClose } from "react-icons/io5";
 import { ArtworkCardProps } from "./artworkCard";
@@ -39,8 +40,21 @@ export default function ArtworkDialog(props: ArtworkDialogProps) {
   const { toggleSavedArtwork, isArtworkSaved } = useRoutePlanner();
   const isAddedToRoute = isArtworkSaved(title);
 
+  const [showToast, setShowToast] = useState(false);
+
+  const handleToggleRoutePlanner = () => {
+    toggleSavedArtwork(props);
+    if (!isAddedToRoute) {
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 3000);
+    } else {
+      setShowToast(false);
+    }
+  };
+
   return (
-    <Dialog.Root
+    <>
+      <Dialog.Root
       open={isOpen}
       onOpenChange={(e) => {
         if (!e.open) onClose();
@@ -76,7 +90,7 @@ export default function ArtworkDialog(props: ArtworkDialogProps) {
               fontWeight="bold"
               color="gray.800"
               shadow="sm"
-              onClick={() => toggleSavedArtwork(props)}>
+              onClick={handleToggleRoutePlanner}>
               <Icon
                 as={isAddedToRoute ? IoCheckmark : CiBookmark}
                 boxSize="4"
@@ -232,5 +246,39 @@ export default function ArtworkDialog(props: ArtworkDialogProps) {
         </Dialog.Content>
       </Dialog.Positioner>
     </Dialog.Root>
+
+    {showToast && (
+      <Box
+        role="status"
+        aria-live="polite"
+        position="fixed"
+        bottom="8"
+        right="8"
+        bg="brand.surface"
+        color="brand.text"
+        borderWidth="1px"
+        borderColor="brand.border"
+        px="4"
+        py="3"
+        borderRadius="md"
+        shadow="xl"
+        display="flex"
+        alignItems="center"
+        gap="3"
+        zIndex="9999"
+      >
+        <Icon as={IoCheckmark} color="green.500" boxSize="5" />
+        <Text fontWeight="medium">Added to route planner</Text>
+        <Icon
+          as={IoClose}
+          boxSize="5"
+          color="brand.muted"
+          cursor="pointer"
+          onClick={() => setShowToast(false)}
+          _hover={{ color: "brand.text" }}
+        />
+      </Box>
+    )}
+    </>
   );
 }
