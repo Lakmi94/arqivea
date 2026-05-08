@@ -46,7 +46,7 @@ export default function Header() {
               asChild
               color="fg.muted"
               _hover={{ color: "fg", textDecoration: "none" }}>
-              <NextLink href="/archive">Archive</NextLink>
+              <NextLink href="/footprints">Footprints</NextLink>
             </ChakraLink>
           </HStack>
 

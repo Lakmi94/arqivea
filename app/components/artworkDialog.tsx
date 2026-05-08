@@ -26,7 +26,6 @@ export default function ArtworkDialog(props: ArtworkDialogProps) {
     title,
     academicNotes,
     imageUrl,
-    recommendationTag,
     museum,
     room,
     medium,
@@ -98,8 +97,8 @@ export default function ArtworkDialog(props: ArtworkDialogProps) {
                 mr="1"
               />
               {isAddedToRoute
-                ? "Added to route planner"
-                : "Add to route planner"}
+                ? "Saved to Wishlist"
+                : "Save to Wishlist"}
             </Button>
           </Dialog.Header>
 
