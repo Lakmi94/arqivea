@@ -21,7 +21,7 @@ export default function RoutePlanner() {
   const { savedArtworks } = useRoutePlanner();
   const [isCreateRouteOpen, setIsCreateRouteOpen] = useState(false);
 
-  return (
+     return (
     <Flex
       p="6"
       direction="column"
@@ -29,70 +29,181 @@ export default function RoutePlanner() {
       align="center"
       bg="brand.bg"
       fontFamily="sans"
-      color="brand.text">
-      <Flex maxW="1299px" direction="row" alignItems="center" w="full">
-        <Flex direction="column" flex="1" align="flex-start" width="full">
-          <Heading as="h1" fontSize="3xl" fontWeight="bold" mt="4">
-            Route Planner
-          </Heading>
-          <Text mt="4" fontSize="lg" color="brand.muted">
-            Wishlist Syncing and Museum Routing
-          </Text>
-          <Text>Your routes: {routes.length}</Text>
-        </Flex>
-        <Button onClick={() => setIsCreateRouteOpen(true)}>
+      color="brand.text"
+    >
+      <Flex maxW="1299px" direction="column" w="full" gap="5">
+        {/* Page header */}
+        <Flex
+          direction={{ base: "column", md: "row" }}
+          justify="space-between"
+          align={{ base: "flex-start", md: "center" }}
+          w="full"
+          gap="4"
+        >
+          <Box>
+            <Heading as="h1" fontSize="3xl" fontWeight="bold">
+              Route Planner
+            </Heading>
+            <Text mt="2" fontSize="lg" color="brand.muted">
+              Wishlist Syncing and Museum Routing
+            </Text>
+            <Text mt="3" color="brand.text">
+              Your routes: 1
+            </Text>
+          </Box>
+
+          <Button onClick={() => setIsCreateRouteOpen(true)}>
             <Icon as={HiOutlinePlus} mr="2" />
-            Create Route</Button>
-      </Flex>
-      <Flex gap="6">
-         <Flex maxH="450px" direction="column">
-        <Flex
-          direction="column"
-          alignItems={"center"}
-          justifyContent={"center"}
-          h="350px"
-          w="430px"
-          bg="brand.surface"
-          p="3"
-          borderRadius="lg"
-          borderWidth="1px"
-          borderColor="brand.border">
-          <Text fontSize="xl" fontWeight="bold" mb="4">
-            No routes yet
-          </Text>
-          <Text>Create a route to plan your visit</Text>
+            New route
+          </Button>
         </Flex>
-      </Flex>
-      <Flex maxH="450px" direction="column">
-        <Flex
-          direction="column"
-          alignItems={"center"}
-          justifyContent={"center"}
-          h="420px"
-          w="845px"
+
+              {/* Main route planning area */}
+      <SimpleGrid columns={{ base: 1, lg: 3 }} gap="5" w="full" alignItems="stretch">
+        {/* Left: route list */}
+        <Box
           bg="brand.surface"
-          p="4"
-          borderRadius="lg"
-          borderWidth="1px"
-          borderColor="brand.border">
-          <Text fontSize="xl" fontWeight="bold" mb="4">
-            Select a route to view its plan 
+          p="5"
+          minH="500px"
+        >
+          <Heading as="h2" fontSize="xl" fontWeight="bold" mb="1">
+            Your routes
+          </Heading>
+          <Text fontSize="sm" color="brand.muted" mb="5">
+            1 saved route
           </Text>
-          <Text>Or create a new route to get started</Text>
-        </Flex>
-      </Flex>
-      </Flex>
-      <Flex direction="column" w="full" maxW="1299px" mt="8">
-        <Text fontSize="xl" fontWeight="bold" mb="4">
-          Wishlist: {savedArtworks.length} items
-        </Text>
-        <Flex overflowX="auto" gap="6" pb="4" w="full">
-          {savedArtworks.map((artwork, index) => (
-            <Box key={index} minW="320px">
-              <RouteArtworkCard {...artwork} />
+
+          <Box
+            borderWidth="1px"
+            borderColor="brand.border"
+            borderRadius="md"
+            p="4"
+            bg="brand.bg"
+            minH="105px"
+          >
+            <Flex justify="space-between" align="flex-start" gap="3">
+              <Box>
+                <Text fontWeight="bold">Madrid&apos;s Golden Triangle</Text>
+                <Text fontSize="sm" color="brand.muted" mt="1">
+                  Multiple museums
+                </Text>
+              </Box>
+
+              <Text fontSize="sm" color="brand.muted">
+                3 stops
+              </Text>
+            </Flex>
+
+            <Flex gap="4" mt="4" color="brand.muted" fontSize="sm">
+              <Text>Planning</Text>
+              <Text>13-05-2026</Text>
+            </Flex>
+          </Box>
+        </Box>
+
+        {/* Right: empty route preview / image placeholder */}
+        <Box
+          bg="brand.surface"
+          borderWidth="1px"
+          borderColor="brand.border"
+          borderRadius="lg"
+          p="5"
+          minH="500px"
+          gridColumn={{ base: "auto", lg: "span 2" }}
+        >
+          <Flex
+            h="full"
+            minH="288px"
+            align="center"
+            justify="center"
+            textAlign="center"
+            borderWidth="1px"
+            borderColor="brand.border"
+            borderRadius="md"
+            bg="brand.bg"
+          >
+            <Box>
+              <Text fontSize="lg" fontWeight="bold">
+                Select a route to view its plan
+              </Text>
+              <Text color="brand.muted" mt="2">
+                Or create a new route to get started
+              </Text>
             </Box>
-          ))}
-        </Flex>
+          </Flex>
+        </Box>
+      </SimpleGrid>
+
+        {/* Wishlist section */}
+        <Box
+          bg="brand.surface"
+          borderWidth="1px"
+          borderColor="brand.border"
+          borderRadius="lg"
+          p="5"
+          w="full"
+        >
+          <Flex justify="space-between" align="center" mb="4">
+            <Box>
+              <Heading as="h2" fontSize="xl" fontWeight="bold">
+                Wishlist
+              </Heading>
+              <Text color="brand.muted" mt="1">
+                Artworks selected from Discovery are saved here before creating a route.
+              </Text>
+            </Box>
+
+            <Text color="brand.muted" fontWeight="medium">
+              Wishlist: {savedArtworks.length > 0 ? savedArtworks.length : 3}
+            </Text>
+          </Flex>
+
+          {savedArtworks.length > 0 ? (
+            <Flex gap="5" pb="2" w="full" align="stretch">
+              {savedArtworks.map((artwork, index) => (
+                <Box key={index} w="250px" flexShrink={0}>
+                  <RouteArtworkCard {...artwork} />
+                </Box>
+              ))}
+            </Flex>
+          ) : (
+            <Flex gap="5" w="full" align="stretch">
+              {[
+                {
+                  title: "Mona Lisa",
+                  museum: "The Louvre",
+                },
+                {
+                  title: "The Starry Night",
+                  museum: "Museum of Modern Art, New York",
+                },
+                {
+                  title: "Sunflowers (Fourth Version)",
+                  museum: "National Gallery, London",
+                },
+              ].map((artwork) => (
+                <Box
+                  key={artwork.title}
+                  bg="brand.bg"
+                  borderWidth="1px"
+                  borderColor="brand.border"
+                  borderRadius="md"
+                  overflow="hidden"
+                  w="250px"
+                  flexShrink={0}
+                >
+                  <Box h="150px" bg="brand.placeholder" />
+                  <Box p="4">
+                    <Text fontWeight="bold">{artwork.title}</Text>
+                    <Text fontSize="sm" color="brand.muted" mt="1">
+                      {artwork.museum}
+                    </Text>
+                  </Box>
+                </Box>
+              ))}
+            </Flex>
+          )}
+        </Box>
       </Flex>
 
       <CreateRouteDialog
