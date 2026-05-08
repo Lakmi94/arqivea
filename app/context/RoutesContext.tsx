@@ -5,6 +5,9 @@ import { createContext, useContext, useState, ReactNode } from "react";
 export interface Route {
   id: string;
   name: string;
+  museums: string[];
+  date: string;
+  stopsCount: number;
 }
 
 interface RoutesContextType {

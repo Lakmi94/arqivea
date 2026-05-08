@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { 
   Dialog, 
   Flex, 
@@ -15,6 +15,10 @@ import {
 } from "@chakra-ui/react";
 import { IoClose, IoChevronForward } from "react-icons/io5";
 import { LuCalendar } from "react-icons/lu";
+import { useRoutePlanner } from "../context/RoutePlannerContext";
+import SelectArtworkCard from "./selectArtworkCard";
+import { ArtworkCardProps } from "./artworkCard";
+import { useRoutes } from "../context/RoutesContext";
 
 interface CreateRouteDialogProps {
   isOpen: boolean;
@@ -23,12 +27,33 @@ interface CreateRouteDialogProps {
 
 export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialogProps) {
   const [step, setStep] = useState(1);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const { savedArtworks, clearSelectedForNewRoute, selectedForNewRoute, removeSavedArtworks } = useRoutePlanner();
+  const { addRoute } = useRoutes();
 
   const [routeName, setRouteName] = useState("");
   const [routeDescription, setRouteDescription] = useState("");
   const [visitDate, setVisitDate] = useState("");
   const [durationHours, setDurationHours] = useState("");
   const [durationMinutes, setDurationMinutes] = useState("");
+
+  const [suggestedArtworks, setSuggestedArtworks] = useState<ArtworkCardProps[]>([]);
+
+  useEffect(() => {
+    fetch("/artworks.json")
+      .then((res) => res.json())
+      .then((data) => {
+        const spainAndModern = data.artworks.filter((artwork: ArtworkCardProps) => {
+          const artworkText = JSON.stringify(artwork).toLowerCase();
+          return artworkText.includes("spain") && artworkText.includes("modern");
+        });
+        setSuggestedArtworks(spainAndModern.slice(-3));
+      })
+      .catch((err) => console.error("Error fetching suggested artworks:", err));
+  }, []);
+
+  // Extract a unique list of museums from the selected artworks
+  const uniqueMuseums = Array.from(new Set(selectedForNewRoute.map((a) => a.museum)));
 
   const steps = ["Details", "Add artworks", "Review & confirm"];
 
@@ -40,25 +65,39 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
 
   const resetState = () => {
     setStep(1);
+    setShowSuggestions(false);
     setRouteName("");
     setRouteDescription("");
     setVisitDate("");
     setDurationHours("");
     setDurationMinutes("");
+    clearSelectedForNewRoute();
   };
 
   const handleContinue = () => {
-    if (step < steps.length) {
+    if (step === 2 && !showSuggestions) {
+      setShowSuggestions(true);
+    } else if (step < steps.length) {
       setStep(step + 1);
     } else {
       // Handle final submit here
+      addRoute({
+        id: Date.now().toString(),
+        name: routeName || "Untitled Route",
+        museums: uniqueMuseums,
+        date: visitDate ? visitDate.split('-').reverse().join('/') : "Not set",
+        stopsCount: selectedForNewRoute.length,
+      });
+      removeSavedArtworks(selectedForNewRoute);
       onClose();
       resetState(); // Reset for next time
     }
   };
 
   const handleCancel = () => {
-    if (step > 1) {
+    if (step === 2 && showSuggestions) {
+      setShowSuggestions(false);
+    } else if (step > 1) {
       // Optional: change this to onClose() if you want Cancel to strictly close the modal
       setStep(step - 1); 
     } else {
@@ -246,16 +285,117 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
               </Flex>
             )}
 
-            {step === 2 && (
-              <Box py={10} textAlign="center">
-                <Text color="gray.500">Add artworks interface goes here...</Text>
-              </Box>
+            {step === 2 && !showSuggestions && (
+              <Flex
+                flexDir="column"
+                gap={4}
+                maxH="400px"
+                overflowY="scroll"
+                pr={5}
+                _scrollbar={{ width: "6px" }}
+                _scrollbarTrack={{ bg: "transparent" }}
+                _scrollbarThumb={{ bg: "brand.border", borderRadius: "full" }}
+              >
+                <Text>Add from the wishlist - {savedArtworks.length} artworks</Text>
+                {savedArtworks.length > 0 ? (
+                  savedArtworks.map((artwork, index) => (
+                    <Box key={index}>
+                      <SelectArtworkCard {...artwork} />
+                    </Box>
+                  ))
+                ) : (
+                  <Box py={10} textAlign="center">
+                    <Text color="gray.500">Your wishlist is empty. Save artworks to your wishlist first!</Text>
+                  </Box>
+                )}
+              </Flex>
+            )}
+
+            {step === 2 && showSuggestions && (
+              <Flex
+                flexDir="column"
+                gap={4}
+                maxH="400px"
+                overflowY="scroll"
+                pr={5}
+                _scrollbar={{ width: "6px" }}
+                _scrollbarTrack={{ bg: "transparent" }}
+                _scrollbarThumb={{ bg: "brand.border", borderRadius: "full" }}
+              >
+                <Text>Add from suggested artworks (optional)</Text>
+                {suggestedArtworks.length > 0 ? (
+                  suggestedArtworks.map((artwork, index) => (
+                    <Box key={index}>
+                      <SelectArtworkCard {...artwork} />
+                    </Box>
+                  ))
+                ) : (
+                  <Box py={10} textAlign="center">
+                    <Text color="gray.500">No suggestions available at this time.</Text>
+                  </Box>
+                )}
+              </Flex>
             )}
 
             {step === 3 && (
-              <Box py={10} textAlign="center">
-                <Text color="gray.500">Review & confirm interface goes here...</Text>
-              </Box>
+              <Flex flexDir="column" gap={6}>
+                {/* Summary Box */}
+                <Box bg="gray.50" borderRadius="lg" p={5} borderWidth="1px" borderColor="brand.border">
+                  <Flex direction="column" gap={3} fontSize="md">
+                    <Flex justify="space-between">
+                      <Text color="gray.500">Route name:</Text>
+                      <Text color="black" textAlign="right">{routeName || "Untitled Route"}</Text>
+                    </Flex>
+                    <Flex justify="space-between">
+                      <Text color="gray.500">Museums:</Text>
+                      <Text color="black" textAlign="right">
+                        {uniqueMuseums.length > 0 ? "• " + uniqueMuseums.join(" • ") : "None"}
+                      </Text>
+                    </Flex>
+                    <Flex justify="space-between">
+                      <Text color="gray.500">Date:</Text>
+                      <Text color="black" textAlign="right">
+                        {visitDate ? visitDate.split('-').reverse().join('/') : "Not set"}
+                      </Text>
+                    </Flex>
+                    <Flex justify="space-between">
+                      <Text color="gray.500">Durations:</Text>
+                      <Text color="black" textAlign="right">
+                        {durationHours || 0} hours {durationMinutes || 0} minutes
+                      </Text>
+                    </Flex>
+                    <Flex justify="space-between">
+                      <Text color="gray.500"># of stops:</Text>
+                      <Text color="black" textAlign="right">
+                        {selectedForNewRoute.length}
+                      </Text>
+                    </Flex>
+                  </Flex>
+                </Box>
+
+                {/* Planned Sequence */}
+                <Box>
+                  <Text color="gray.500" mb={2}>Planned sequence</Text>
+                  <Flex
+                    flexDir="column"
+                    maxH="200px"
+                    overflowY="scroll"
+                    pr={4}
+                    _scrollbar={{ width: "6px" }}
+                    _scrollbarTrack={{ bg: "transparent" }}
+                    _scrollbarThumb={{ bg: "brand.border", borderRadius: "full" }}
+                  >
+                    {selectedForNewRoute.length > 0 ? selectedForNewRoute.map((artwork, index) => (
+                      <Flex key={index} justify="space-between" py={3} borderBottomWidth={index !== selectedForNewRoute.length - 1 ? "1px" : "0"} borderColor="gray.200">
+                        <Text color="black">{index + 1}. {artwork.title}</Text>
+                        <Text color="gray.400">Room {artwork.room}</Text>
+                      </Flex>
+                    )) : (
+                       <Text color="gray.500" fontStyle="italic">No artworks selected for this route.</Text>
+                    )}
+                  </Flex>
+                </Box>
+              </Flex>
             )}
           </Dialog.Body>
 
@@ -271,7 +411,7 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
                 px={8}
                 size="lg"
               >
-                Cancel
+                {step > 1 || showSuggestions ? "Back" : "Cancel"}
               </Button>
               <Button 
                 onClick={handleContinue} 

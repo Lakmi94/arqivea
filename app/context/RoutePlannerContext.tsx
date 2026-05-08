@@ -7,6 +7,11 @@ interface RoutePlannerContextType {
   savedArtworks: ArtworkCardProps[];
   toggleSavedArtwork: (artwork: ArtworkCardProps) => void;
   isArtworkSaved: (title: string) => boolean;
+  selectedForNewRoute: ArtworkCardProps[];
+  toggleSelectedForNewRoute: (artwork: ArtworkCardProps) => void;
+  isSelectedForNewRoute: (title: string) => boolean;
+  clearSelectedForNewRoute: () => void;
+  removeSavedArtworks: (artworksToRemove: ArtworkCardProps[]) => void;
 }
 
 const RoutePlannerContext = createContext<RoutePlannerContextType | undefined>(undefined);
@@ -61,6 +66,7 @@ const defaultSavedArtworks: ArtworkCardProps[] = [
 
 export function RoutePlannerProvider({ children }: { children: ReactNode }) {
   const [savedArtworks, setSavedArtworks] = useState<ArtworkCardProps[]>(defaultSavedArtworks);
+  const [selectedForNewRoute, setSelectedForNewRoute] = useState<ArtworkCardProps[]>([]);
 
   const toggleSavedArtwork = (artwork: ArtworkCardProps) => {
     setSavedArtworks((prev) => {
@@ -77,8 +83,34 @@ export function RoutePlannerProvider({ children }: { children: ReactNode }) {
     return savedArtworks.some((a) => a.title === title);
   };
 
+  const toggleSelectedForNewRoute = (artwork: ArtworkCardProps) => {
+    setSelectedForNewRoute((prev) => {
+      const isSelected = prev.some((a) => a.title === artwork.title);
+      if (isSelected) {
+        return prev.filter((a) => a.title !== artwork.title);
+      } else {
+        return [...prev, artwork];
+      }
+    });
+  };
+
+  const isSelectedForNewRoute = (title: string) => {
+    return selectedForNewRoute.some((a) => a.title === title);
+  };
+
+  const clearSelectedForNewRoute = () => {
+    setSelectedForNewRoute([]);
+  };
+
+  const removeSavedArtworks = (artworksToRemove: ArtworkCardProps[]) => {
+    setSavedArtworks((prev) => {
+      const titlesToRemove = artworksToRemove.map((a) => a.title);
+      return prev.filter((a) => !titlesToRemove.includes(a.title));
+    });
+  };
+
   return (
-    <RoutePlannerContext.Provider value={{ savedArtworks, toggleSavedArtwork, isArtworkSaved }}>
+    <RoutePlannerContext.Provider value={{ savedArtworks, toggleSavedArtwork, isArtworkSaved, selectedForNewRoute, toggleSelectedForNewRoute, isSelectedForNewRoute, clearSelectedForNewRoute, removeSavedArtworks }}>
       {children}
     </RoutePlannerContext.Provider>
   );
