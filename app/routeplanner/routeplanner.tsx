@@ -20,6 +20,7 @@ export default function RoutePlanner() {
   const { routes } = useRoutes();
   const { savedArtworks } = useRoutePlanner();
   const [isCreateRouteOpen, setIsCreateRouteOpen] = useState(false);
+  const [isRouteSelected, setIsRouteSelected] = useState(false);
 
      return (
     <Flex
@@ -78,8 +79,11 @@ export default function RoutePlanner() {
             borderColor="brand.border"
             borderRadius="md"
             p="4"
-            bg="brand.bg"
+            bg={isRouteSelected ? "brand.surface" : "brand.bg"}
             minH="105px"
+            cursor="pointer"
+            onClick={() => setIsRouteSelected(true)}
+            _hover={{ borderColor: "brand.text" }}
           >
             <Flex justify="space-between" align="flex-start" gap="3">
               <Box>
@@ -101,36 +105,178 @@ export default function RoutePlanner() {
           </Box>
         </Box>
 
-        {/* Right: empty route preview / image placeholder */}
+                {/* Right: selected route detail / image placeholder */}
         <Box
           bg="brand.surface"
           borderWidth="1px"
           borderColor="brand.border"
           borderRadius="lg"
           p="5"
-          minH="500px"
+          minH="380px"
           gridColumn={{ base: "auto", lg: "span 2" }}
         >
-          <Flex
-            h="full"
-            minH="288px"
-            align="center"
-            justify="center"
-            textAlign="center"
-            borderWidth="1px"
-            borderColor="brand.border"
-            borderRadius="md"
-            bg="brand.bg"
-          >
-            <Box>
-              <Text fontSize="lg" fontWeight="bold">
-                Select a route to view its plan
-              </Text>
-              <Text color="brand.muted" mt="2">
-                Or create a new route to get started
-              </Text>
-            </Box>
-          </Flex>
+          {isRouteSelected ? (
+            <Flex direction="column" gap="4" minH="338px">
+              {/* Route title and summary */}
+              <Flex
+                justify="space-between"
+                align="center"
+                borderWidth="1px"
+                borderColor="brand.border"
+                borderRadius="md"
+                bg="brand.bg"
+                p="4"
+              >
+                <Text fontWeight="bold" fontSize="lg">
+                  Madrid&apos;s Golden Triangle
+                </Text>
+
+                <Flex gap="5" color="brand.muted" fontSize="sm">
+                  <Text>3 museums</Text>
+                  <Text>4 artworks</Text>
+                  <Text>~2 hrs</Text>
+                </Flex>
+              </Flex>
+
+              <Flex gap="5" flex="1" minH="280px">
+                {/* Left route steps */}
+                <Box w="280px" flexShrink={0}>
+                  <Text color="brand.muted" fontSize="sm" mb="3">
+                    Click a museum to view floor plan
+                  </Text>
+
+                  <Flex direction="column" align="center" gap="2">
+                    <Box
+                      w="full"
+                      bg="brand.bg"
+                      borderWidth="1px"
+                      borderColor="brand.border"
+                      borderRadius="md"
+                      p="3"
+                    >
+                      <Flex justify="space-between" align="center">
+                        <Box>
+                          <Text fontWeight="medium">Museo Reina Sofía</Text>
+                          <Text fontSize="sm" color="brand.muted">
+                            40 mins
+                          </Text>
+                        </Box>
+                        <Text color="brand.muted">⌄</Text>
+                      </Flex>
+                    </Box>
+
+                    <Text color="brand.muted" fontSize="sm" my="1">
+                      10 min · 700 m
+                    </Text>
+
+                    <Box
+                      h="34px"
+                      borderLeftWidth="3px"
+                      borderLeftStyle="dotted"
+                      borderColor="brand.muted"
+                    />
+
+                    <Box
+                      w="full"
+                      bg="brand.bg"
+                      borderWidth="1px"
+                      borderColor="brand.border"
+                      borderRadius="md"
+                      p="3"
+                    >
+                      <Flex justify="space-between" align="center">
+                        <Box>
+                          <Text fontWeight="medium">Museo Nacional del Prado</Text>
+                          <Text fontSize="sm" color="brand.muted">
+                            30 mins
+                          </Text>
+                        </Box>
+                        <Text color="brand.muted">⌄</Text>
+                      </Flex>
+                    </Box>
+
+                    <Text color="brand.muted" fontSize="sm" my="1">
+                      6 min · 450 m
+                    </Text>
+
+                    <Box
+                      h="34px"
+                      borderLeftWidth="3px"
+                      borderLeftStyle="dotted"
+                      borderColor="brand.muted"
+                    />
+
+                    <Box
+                      w="full"
+                      bg="brand.bg"
+                      borderWidth="1px"
+                      borderColor="brand.border"
+                      borderRadius="md"
+                      p="3"
+                    >
+                      <Flex justify="space-between" align="center">
+                        <Box>
+                          <Text fontWeight="medium">Museo Thyssen-Bornemisza</Text>
+                          <Text fontSize="sm" color="brand.muted">
+                            30 mins
+                          </Text>
+                        </Box>
+                        <Text color="brand.muted">⌄</Text>
+                      </Flex>
+                    </Box>
+                  </Flex>
+                </Box>
+
+                {/* Right map placeholder */}
+                <Box
+                  flex="1"
+                  bg="brand.bg"
+                  borderWidth="1px"
+                  borderColor="brand.border"
+                  borderRadius="md"
+                  minH="280px"
+                  overflow="hidden"
+                >
+                  <Flex
+                    h="full"
+                    minH="280px"
+                    align="center"
+                    justify="center"
+                    textAlign="center"
+                    p="6"
+                  >
+                    <Box>
+                      <Text fontWeight="bold">Route map image area</Text>
+                      <Text color="brand.muted" fontSize="sm" mt="2">
+                        The Madrid museum route map will be placed here.
+                      </Text>
+                    </Box>
+                  </Flex>
+                </Box>
+              </Flex>
+            </Flex>
+          ) : (
+            <Flex
+              h="full"
+              minH="338px"
+              align="center"
+              justify="center"
+              textAlign="center"
+              borderWidth="1px"
+              borderColor="brand.border"
+              borderRadius="md"
+              bg="brand.bg"
+            >
+              <Box>
+                <Text fontSize="lg" fontWeight="bold">
+                  Select a route to view its plan
+                </Text>
+                <Text color="brand.muted" mt="2">
+                  Or create a new route to get started
+                </Text>
+              </Box>
+            </Flex>
+          )}
         </Box>
       </SimpleGrid>
 
