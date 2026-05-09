@@ -1,26 +1,45 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* 1. Background & Surface */
+  --color-bg-page: #F4F4F2;
+  --color-surface-default: #E8E8E8;
+  --color-surface-soft-warm: #F6F7D3;
+  --color-surface-soft-cool: #CAE4DB;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* 2. Text */
+  --color-text-primary: #333333;
+  --color-text-secondary: #495464;
+  --color-text-strong: #333C4A;
+  --color-text-inverse: #F4F4F2;
+  --color-text-muted: #BBBFCA;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* 3. Actions & Functional */
+  --color-action-primary: #495464;
+  --color-action-primary-text: #F4F4F2;
+  --color-action-primary-hover: #3b4451;
+
+  /* 4. Emotive / Footprint */
+  --color-footprint-bg: #CAE4DB;
+  --color-footprint-highlight: #00303F;
+  --color-share-highlight: #CDAC81;
+
+  /* 5. Spacing */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+
+  /* 6. Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg-page);
+  color: var(--color-text-primary);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }

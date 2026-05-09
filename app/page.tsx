@@ -107,16 +107,14 @@ export default function Home() {
       bg="brand.bg"
       fontFamily="sans"
       color="brand.text">
-        <Flex  direction="column"
-     >
-            <Heading as="h1" fontSize="3xl" fontWeight="bold" mt="4">
-        Discovery
-      </Heading>
-      <Text mt="4" fontSize="lg" color="brand.muted">
-        Hyper-search & Academic Gallery
-      </Text>
-        </Flex>
-    
+      <Flex direction="column" w="full" maxW="1299px" align="flex-start">
+        <Heading as="h1" fontSize="3xl" fontWeight="bold" mt="4">
+          Discovery
+        </Heading>
+        <Text mt="4" fontSize="lg" color="brand.muted">
+          Hyper-search & Academic Gallery
+        </Text>
+      </Flex>
 
       <Flex
         mt="8"
@@ -129,7 +127,7 @@ export default function Home() {
         bg="brand.surface"
         align="center"
         w="full"
-        maxW="4xl">
+        maxW="1299px">
         <Icon size="lg" color="">
           <CiSearch />
         </Icon>{" "}
@@ -184,7 +182,7 @@ export default function Home() {
         </Button>
       </Flex>
       {showFilters && (
-        <Box w="full" maxW="4xl" mt="4">
+        <Box w="full" maxW="1299px" mt="4">
           <Filters
             onApply={() => {
               setSearchQuery(""); // Clears search bar text
@@ -204,14 +202,16 @@ export default function Home() {
       )}
       {!showResults ||
       (appliedFilters.length === 0 && appliedSearchQuery.trim() === "") ? (
-        <Flex direction={"column"}>
-          <Text>Recommended artwork</Text>
+        <Flex direction={"column"} w="full" maxW="1299px" align="flex-start" mt="10">
+          <Text fontSize="lg" color="brand.muted" mb="6">
+            Recommended artwork
+          </Text>
           <SimpleGrid
             columns={{ base: 1, md: 2, lg: 3 }}
             gap={6}
-            mt="12"
+            mt="4"
             w="full"
-            maxW="6xl"
+            maxW="1299px"
             position={"relative"}>
             {artworksData.artworks.map(
               (artwork) =>
@@ -237,14 +237,14 @@ export default function Home() {
           </SimpleGrid>
         </Flex>
       ) : isSpainAndModern || isSpanishModernSearch ? (
-        <Flex direction="column" w="full" align="center">
+        <Flex direction="column" w="full" maxW="1299px" align="flex-start">
           <Text>{`${spainAndModernArtworks.length} results found for "Spain" + "Modernism"`}</Text>
           <SimpleGrid
             columns={{ base: 1, md: 2, lg: 3 }}
             gap={6}
             mt="12"
             w="full"
-            maxW="6xl"
+            maxW="1299px"
             position={"relative"}>
             {spainAndModernArtworks.map((artwork) => (
               <ArtworkCard
@@ -267,7 +267,7 @@ export default function Home() {
           </SimpleGrid>
         </Flex>
       ) : (
-        <Flex mt="8">
+        <Flex mt="8" w="full" maxW="1299px" align="flex-start">
           <Text fontSize="md" color="brand.muted">
             {appliedSearchQuery.trim().length > 0
               ? `No results found for "${appliedSearchQuery}"`
