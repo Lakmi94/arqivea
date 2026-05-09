@@ -27,7 +27,7 @@ export default function RouteArtworkCard(props: ArtworkCardProps) {
       )}
       <Box p="4">
         <Text fontWeight="bold">{title}</Text>
-        <Text color="brand.muted" fontSize="sm">{artist}</Text>
+        <Text color="brand.muted" fontSize="sm">{museum}</Text>
       </Box>
     </Box>
   );
