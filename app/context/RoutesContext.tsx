@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, ReactNode } from "react";
+import { ArtworkCardProps } from "../components/artworkCard";
 
 export interface Route {
   id: string;
@@ -8,6 +9,7 @@ export interface Route {
   museums: string[];
   date: string;
   stopsCount: number;
+  artworks: ArtworkCardProps[];
 }
 
 interface RoutesContextType {

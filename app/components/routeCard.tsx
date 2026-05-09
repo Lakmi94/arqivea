@@ -5,8 +5,13 @@ import { MdOutlineMuseum } from "react-icons/md";
 import { LuCalendar } from "react-icons/lu";
 import { Route } from "../context/RoutesContext";
 
-export default function RouteCard(props: Route) {
-  const { name, museums, date, stopsCount } = props;
+interface RouteCardProps extends Route {
+  onClick?: () => void;
+  isSelected?: boolean;
+}
+
+export default function RouteCard(props: RouteCardProps) {
+  const { name, museums, date, stopsCount, onClick, isSelected } = props;
 
   const displayMuseums =
     museums.length > 2
@@ -22,11 +27,12 @@ export default function RouteCard(props: Route) {
       bg="brand.surface"
       p="5"
       shadow="sm"
-      borderColor="brand.border"
+      borderColor={isSelected ? "gray.800" : "brand.border"}
       w="full"
-      _hover={{ shadow: "md", borderColor: "gray.400" }}
+      _hover={{ shadow: "md", borderColor: isSelected ? "gray.800" : "gray.400" }}
       transition="all 0.2s"
       cursor="pointer"
+      onClick={onClick}
     >
       <Text fontSize="xl" fontWeight="bold" mb="3">{name}</Text>
       <Flex direction="column" gap="2" color="gray.600" fontSize="sm">
