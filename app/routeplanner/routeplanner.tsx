@@ -10,7 +10,7 @@ import {
   Grid,
   Image,
 } from "@chakra-ui/react";
-import { useRoutes, Route } from "../context/RoutesContext";
+import { useRoutes } from "../context/RoutesContext";
 import { useRoutePlanner } from "../context/RoutePlannerContext";
 import RouteArtworkCard from "../components/routeArtworkCard";
 import CreateRouteDialog from "../components/createRouteDialog";

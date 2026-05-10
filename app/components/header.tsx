@@ -4,7 +4,6 @@ import {
   Flex,
   HStack,
   Box,
-  Button,
   Link as ChakraLink,
   Container,
 } from "@chakra-ui/react";
@@ -28,7 +27,9 @@ export default function Header() {
           {/* 1. Logo / Brand */}
           <Box fontWeight="bold" fontSize="xl" letterSpacing="tight">
             <ChakraLink asChild _hover={{ textDecoration: "none" }}>
-              <NextLink href="/" onClick={resetAll}>Arqivea</NextLink>
+              <NextLink href="/" onClick={resetAll}>
+                Arqivea
+              </NextLink>
             </ChakraLink>
           </Box>
 
@@ -39,7 +40,9 @@ export default function Header() {
               asChild
               color="fg.muted"
               _hover={{ color: "fg", textDecoration: "none" }}>
-              <NextLink href="/" onClick={resetAll}>Discovery</NextLink>
+              <NextLink href="/" onClick={resetAll}>
+                Discovery
+              </NextLink>
             </ChakraLink>
             <ChakraLink
               asChild
@@ -54,7 +57,6 @@ export default function Header() {
               <NextLink href="/footprints">Footprints</NextLink>
             </ChakraLink>
           </HStack>
-
         </Flex>
       </Container>
     </Box>

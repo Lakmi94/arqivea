@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Box, Flex, Text, Button, Icon, Dialog, Image, Spinner } from "@chakra-ui/react";
+import { Box, Flex, Text, Icon, Dialog, Image, Spinner } from "@chakra-ui/react";
 import { IoClose, IoCheckmark } from "react-icons/io5";
 
 interface ShareDialogProps {
