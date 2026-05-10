@@ -80,28 +80,6 @@ export default function ArtworkDialog(props: ArtworkDialogProps) {
                 {title}
               </Dialog.Title>
             </Flex>
-            <Button
-              top="4"
-              left="4"
-              bg="whiteAlpha.900"
-              backdropFilter="blur(4px)"
-              px="2"
-              py="1"
-              borderRadius="md"
-              fontSize="xs"
-              fontWeight="bold"
-              color="gray.800"
-              shadow="sm"
-              onClick={handleToggleRoutePlanner}>
-              <Icon
-                as={isAddedToRoute ? IoCheckmark : CiBookmark}
-                boxSize="4"
-                mr="1"
-              />
-              {isAddedToRoute
-                ? "Saved to Wishlist"
-                : "Save to Wishlist"}
-            </Button>
           </Dialog.Header>
 
           <Dialog.Body display={"flex"} flexDir={"row"} gap="8">
@@ -138,10 +116,32 @@ export default function ArtworkDialog(props: ArtworkDialogProps) {
             </Flex>
             </Flex>
             <Flex flexDir={"column"} w="540px" mt={'-30px'} pb="4">
-              <Flex borderBottomWidth="1px">
-                <Text fontSize="lg" color="brand.muted" mb="4">
+              <Flex borderBottomWidth="1px" justify="space-between" align="center" pb="4">
+                <Text fontSize="lg" color="brand.muted">
                   {artist}
                 </Text>
+                <Button
+                  bg="whiteAlpha.900"
+                  backdropFilter="blur(4px)"
+                  px="4"
+                  py="2"
+                  borderRadius="md"
+                  borderWidth="1px"
+                  borderColor="brand.border"
+                  fontSize="sm"
+                  fontWeight="bold"
+                  color="gray.800"
+                  shadow="sm"
+                  onClick={handleToggleRoutePlanner}>
+                  <Icon
+                    as={isAddedToRoute ? IoCheckmark : CiBookmark}
+                    boxSize="4"
+                    mr="2"
+                  />
+                  {isAddedToRoute
+                    ? "Saved to Wishlist"
+                    : "Save to Wishlist"}
+                </Button>
               </Flex>
 
               <Flex
