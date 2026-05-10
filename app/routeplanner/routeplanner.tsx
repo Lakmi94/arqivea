@@ -206,13 +206,58 @@ export default function RoutePlanner() {
                           direction="column" align="center" justify="center" flex="1" w="full" 
                           bg="brand.surface"  p={4}
                         >
-                          <Image
-                            src={`/images/${selectedRoute.museums[expandedMuseumIndex]}.jpg`}
-                            alt={`${selectedRoute.museums[expandedMuseumIndex]} floor plan`}
-                            objectFit="cover"
-                            w="full"
-                            maxH="270px"
-                          />
+                          <Box position="relative" w="full" maxH="270px">
+                            <Image
+                              src={`/images/${selectedRoute.museums[expandedMuseumIndex]}.jpg`}
+                              alt={`${selectedRoute.museums[expandedMuseumIndex]} floor plan`}
+                              objectFit="cover"
+                              w="full"
+                              h="full"
+                              maxH="270px"
+                            />
+                            {selectedRoute.artworks
+                              ?.filter((a) => a.museum === selectedRoute.museums[expandedMuseumIndex])
+                              .map((artwork, i) => {
+                                // Mock positions for the floor plan markers
+                                const currentMuseum = selectedRoute.museums[expandedMuseumIndex];
+                                const museumPositions: Record<string, { top: string; left: string }[]> = {
+                                  "Museo Nacional del Prado": [
+                                    { top: "40%", left: "30%" },
+                                    { top: "60%", left: "70%" },
+                                    { top: "30%", left: "60%" },
+                                    { top: "80%", left: "40%" }
+                                  ],
+                                  "Museo Reina Sofía": [
+                                    { top: "20%", left: "30%" },
+                                    { top: "70%", left: "20%" },
+                                    { top: "50%", left: "80%" },
+                                    { top: "20%", left: "70%" }
+                                  ],
+                                  "Museo Nacional Thyssen-Bornemisza": [
+                                    { top: "75%", left: "80%"  },
+                                    { top: "45%", left: "65%" },
+                                    { top: "10%", left: "25%"},
+                                    { top: "50%", left: "50%" }
+                                  ]
+                                };
+                                const defaultPositions = [
+                                  { top: "35%", left: "24%" },
+                                  { top: "60%", left: "65%" },
+                                  { top: "35%", left: "75%" },
+                                  { top: "70%", left: "45%" },
+                                  { top: "50%", left: "50%" },
+                                ];
+                                
+                                const activePositions = museumPositions[currentMuseum] || defaultPositions;
+                                const pos = activePositions[i % activePositions.length];
+                                return (
+                                  <Box key={i} position="absolute" top={pos.top} left={pos.left} transform="translate(-50%, -100%)" zIndex={2}>
+                                    <Icon as={IoLocationSharp} boxSize="8" color="red.500" />
+                                    <Box position="absolute" top="6px" left="50%" transform="translateX(-50%)" w="2.5" h="2.5" bg="white" borderRadius="full" />
+                                  </Box>
+                                );
+                              })}
+                          </Box>
                           <Flex gap={2} wrap="wrap" justify="center" mt={2}>
                             {selectedRoute.artworks
                               ?.filter((a) => a.museum === selectedRoute.museums[expandedMuseumIndex])
