@@ -164,7 +164,12 @@ export default function Footprints() {
                   );
                 })
               ) : (
-                <Text color="brand.muted">No routes added yet.</Text>
+                <Flex direction="column" align="center" justify="center" p={6} bg="brand.surface" borderRadius="md" borderWidth="1px" borderColor="brand.border">
+                  <Text fontWeight="bold">No routes yet</Text>
+                  <Text color="brand.muted" fontSize="sm" textAlign="center" mt={2}>
+                    Head over to the Route Planner to create your first museum route!
+                  </Text>
+                </Flex>
               )}
             </Flex>
           </Box>

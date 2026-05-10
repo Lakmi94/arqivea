@@ -22,8 +22,10 @@ export default function RoutePlanner() {
   const { routes } = useRoutes();
   const { savedArtworks } = useRoutePlanner();
   const [isCreateRouteOpen, setIsCreateRouteOpen] = useState(false);
-  const [selectedRoute, setSelectedRoute] = useState<Route | null>(null);
+  const [selectedRouteId, setSelectedRouteId] = useState<string | null>(null);
   const [expandedMuseumIndex, setExpandedMuseumIndex] = useState<number | null>(null);
+
+  const selectedRoute = routes.find((r) => r.id === selectedRouteId) || null;
 
      return (
     <Flex
@@ -87,7 +89,7 @@ export default function RoutePlanner() {
                 {...route} 
                 isSelected={selectedRoute?.id === route.id}
                 onClick={() => {
-                  setSelectedRoute(route);
+                  setSelectedRouteId(route.id);
                   setExpandedMuseumIndex(null);
                 }}
               />

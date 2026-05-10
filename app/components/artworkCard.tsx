@@ -28,6 +28,9 @@ export default function ArtworkCard(props: ArtworkCardProps) {
   return (
     <>
     <Box
+      role="button"
+      tabIndex={0}
+      aria-label={`View details for ${title}`}
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
@@ -35,6 +38,12 @@ export default function ArtworkCard(props: ArtworkCardProps) {
       shadow="sm"
       cursor="pointer"
       onClick={() => setIsDialogOpen(true)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          setIsDialogOpen(true);
+        }
+      }}
       _hover={{ shadow: "md" }}
       transition="shadow 0.2s">
       <Box position="relative">

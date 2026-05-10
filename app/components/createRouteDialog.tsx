@@ -191,8 +191,11 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
             {step === 1 && (
               <Flex flexDir="column" gap={5}>
                 <Box>
-                  <Text mb="2" color="gray.500">Route name *</Text>
+                  <label htmlFor="routeName">
+                    <Text display="block" mb="2" color="gray.500">Route name *</Text>
+                  </label>
                   <Input
+                    id="routeName"
                     borderColor="gray.300"
                     borderRadius="md"
                     size="lg"
@@ -201,8 +204,11 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
                   />
                 </Box>
                 <Box>
-                  <Text mb="2" color="gray.500">Route description *</Text>
+                  <label htmlFor="routeDescription">
+                    <Text display="block" mb="2" color="gray.500">Route description *</Text>
+                  </label>
                   <Textarea
+                    id="routeDescription"
                     borderColor="gray.300"
                     borderRadius="md"
                     size="lg"
@@ -258,10 +264,11 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
                   </DatePicker.Root>
                 </Box>
                 <Box>
-                  <Text mb="2" color="gray.500">Route duration *</Text>
+                  <Text display="block" mb="2" color="gray.500">Route duration *</Text>
                   <Flex gap={4}>
                     <Flex align="center" gap={2} flex={1}>
                       <Input
+                        aria-label="Duration hours"
                         type="number"
                         placeholder="0"
                         min={0}
@@ -275,6 +282,7 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
                     </Flex>
                     <Flex align="center" gap={2} flex={1}>
                       <Input
+                        aria-label="Duration minutes"
                         type="number"
                         placeholder="00"
                         min={0}
@@ -423,7 +431,11 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
               </Button>
               <Button 
                 onClick={handleContinue} 
-                disabled={step === 1 && !isStep1Valid}
+                disabled={
+                  (step === 1 && !isStep1Valid) ||
+                  (step === 2 && !showSuggestions && selectedForNewRoute.length === 0) ||
+                  (step === 3 && selectedForNewRoute.length === 0)
+                }
                 bg="gray.400" // Kept gray as in your wireframe, change to brand.primary for production
                 color="white" 
                 _hover={{ bg: "gray.500" }} 

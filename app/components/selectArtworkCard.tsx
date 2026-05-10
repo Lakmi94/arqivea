@@ -49,6 +49,7 @@ export default function SelectArtworkCard(props: ArtworkCardProps) {
         </Flex>
       </Flex>
       <Button
+        aria-label={isSelected ? `Remove ${title} from route` : `Add ${title} to route`}
         bg={isSelected ? "gray.800" : "transparent"}
         borderWidth="1px"
         borderColor={isSelected ? "gray.800" : "brand.border"}
