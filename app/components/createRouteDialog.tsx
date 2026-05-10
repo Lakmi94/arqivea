@@ -88,6 +88,7 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
         date: visitDate ? visitDate.split('-').reverse().join('/') : "Not set",
         stopsCount: uniqueMuseums.length,
         artworks: selectedForNewRoute,
+        isCompleted: false,
       });
       removeSavedArtworks(selectedForNewRoute);
       onClose();

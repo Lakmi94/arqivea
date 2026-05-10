@@ -10,11 +10,13 @@ export interface Route {
   date: string;
   stopsCount: number;
   artworks: ArtworkCardProps[];
+  isCompleted?: boolean;
 }
 
 interface RoutesContextType {
   routes: Route[];
   addRoute: (route: Route) => void;
+  toggleRouteCompletion: (id: string) => void;
 }
 
 const RoutesContext = createContext<RoutesContextType | undefined>(undefined);
@@ -26,8 +28,16 @@ export function RoutesProvider({ children }: { children: ReactNode }) {
     setRoutes((prev) => [...prev, route]);
   };
 
+  const toggleRouteCompletion = (id: string) => {
+    setRoutes((prev) =>
+      prev.map((route) =>
+        route.id === id ? { ...route, isCompleted: !route.isCompleted } : route
+      )
+    );
+  };
+
   return (
-    <RoutesContext.Provider value={{ routes, addRoute }}>
+    <RoutesContext.Provider value={{ routes, addRoute, toggleRouteCompletion }}>
       {children}
     </RoutesContext.Provider>
   );
