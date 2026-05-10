@@ -16,6 +16,7 @@ import {
 import { IoClose, IoChevronForward } from "react-icons/io5";
 import { LuCalendar } from "react-icons/lu";
 import { useRoutePlanner } from "../context/RoutePlannerContext";
+import { today, getLocalTimeZone } from "@internationalized/date";
 import SelectArtworkCard from "./selectArtworkCard";
 import { ArtworkCardProps } from "./artworkCard";
 import { useRoutes } from "../context/RoutesContext";
@@ -125,6 +126,9 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
           color="brand.text"
           borderRadius="xl"
           minW="500px"
+          h="650px"
+          display="flex"
+          flexDir="column"
           shadow="2xl"
           position="relative"
           overflow="hidden"
@@ -183,7 +187,7 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
           </Box>
 
           {/* Form Body - Conditionally rendered based on 'step' */}
-          <Dialog.Body px={8} py={6} bg="white">
+          <Dialog.Body px={8} py={6} bg="white" flex="1" overflowY="auto">
             {step === 1 && (
               <Flex flexDir="column" gap={5}>
                 <Box>
@@ -202,7 +206,8 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
                     borderColor="gray.300"
                     borderRadius="md"
                     size="lg"
-                    rows={3}
+                    rows={2}
+                    resize="none"
                     value={routeDescription}
                     onChange={(e) => setRouteDescription(e.target.value)}
                   />
@@ -210,6 +215,7 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
                 <Box>
                   <DatePicker.Root
                     w="full"
+                    min={today(getLocalTimeZone())}
                     onValueChange={(e) => {
                       // Extracts the string format from the Ark UI DatePicker
                       const newDate = e.valueAsString[0] || "";

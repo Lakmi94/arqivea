@@ -61,7 +61,7 @@ export default function RoutePlanner() {
             Create Route</Button>
       </Flex>
       
-      <Flex gap="6" w="full" maxW="1299px" mt="6">
+      <Flex gap="6" w="full" maxW="1299px" mt="2">
         <Flex
           maxH="450px"
           direction="column"
@@ -200,22 +200,25 @@ export default function RoutePlanner() {
                   {/* Right Column (Map) */}
                   <Box borderRadius="lg" position="relative" overflow="hidden" minH={{ base: "300px", md: "auto" }} borderWidth="1px" borderColor="brand.border">
                     {expandedMuseumIndex !== null ? (
-                      <Flex direction="column" align="center" justify="center" h="full" w="full" bg="brand.surface" p={6}>
-                        <Text fontWeight="bold" fontSize="lg" mb={4} textAlign="center">
-                          {selectedRoute.museums[expandedMuseumIndex]} Floor Plan
-                        </Text>
+                      <Flex direction="column" align="center" justify="center" h="full" w="full" bg="brand.surface" >
+                       
                         <Flex 
                           direction="column" align="center" justify="center" flex="1" w="full" 
-                          bg="gray.50" borderRadius="lg" borderWidth="2px" borderColor="gray.200" borderStyle="dashed" p={4}
+                          bg="brand.surface"  p={4}
                         >
-                          <Icon as={IoLocationSharp} boxSize="12" color="gray.400" mb={4} />
-                          <Text color="gray.500" mb={4} fontWeight="medium">Floor plan view</Text>
-                          <Flex gap={2} wrap="wrap" justify="center">
+                          <Image
+                            src={`/images/${selectedRoute.museums[expandedMuseumIndex]}.jpg`}
+                            alt={`${selectedRoute.museums[expandedMuseumIndex]} floor plan`}
+                            objectFit="cover"
+                            w="full"
+                            maxH="270px"
+                          />
+                          <Flex gap={2} wrap="wrap" justify="center" mt={2}>
                             {selectedRoute.artworks
                               ?.filter((a) => a.museum === selectedRoute.museums[expandedMuseumIndex])
                               .map((artwork, i) => (
                                 <Box key={i} px={3} py={1.5} bg="brand.primary" color="white" borderRadius="full" fontSize="xs" fontWeight="bold" shadow="sm">
-                                  Room {artwork.room}
+                                  {artwork.title} • Room {artwork.room}
                                 </Box>
                               ))}
                           </Flex>
@@ -230,9 +233,12 @@ export default function RoutePlanner() {
                           w="full"
                           h="full"
                         />
-                        {/* SVG Path Overlay */}
-                        <svg width="100%" height="100%" style={{ position: 'absolute', top: 0, left: 0, zIndex: 1 }}>
-                          <path d="M 45% 25% L 60% 50% L 40% 75%" fill="transparent" stroke="#1A202C" strokeWidth="4" strokeDasharray="8 8" />
+                        {/* SVG Path Overlay - Google Maps Walking Style */}
+                        <svg viewBox="0 0 100 100" preserveAspectRatio="none" width="100%" height="100%" style={{ position: 'absolute', top: 0, left: 0, zIndex: 1, filter: 'drop-shadow(0px 1px 2px rgba(0,0,0,0.3))' }}>
+                          {/* White halo/outline */}
+                          <path d="M 36 18 L 40 20 L 40 28 L 48 38 L 48 50 L 42 60 L 42 78 L 38 88" fill="transparent" stroke="white" strokeWidth="8" strokeLinecap="round" strokeDasharray="0 12" vectorEffect="non-scaling-stroke" />
+                          {/* Blue dots */}
+                          <path d="M 36 18 L 40 20 L 40 28 L 48 38 L 48 50 L 42 60 L 42 78 L 38 88" fill="transparent" stroke="#1A73E8" strokeWidth="5" strokeLinecap="round" strokeDasharray="0 12" vectorEffect="non-scaling-stroke" />
                         </svg>
                         {/* Markers for the 3 museums */}
                         {[
@@ -254,7 +260,7 @@ export default function RoutePlanner() {
           )}
         </Flex>
       </Flex>
-      <Flex direction="column" w="full" maxW="1299px" mt="8">
+      <Flex direction="column" w="full" maxW="1299px" mt="4">
         <Text fontSize="xl" fontWeight="bold" mb="4">
           Wishlist: {savedArtworks.length} items
         </Text>
