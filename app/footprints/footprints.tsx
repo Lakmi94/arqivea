@@ -7,12 +7,33 @@ import {
   Flex,
   Heading,
   Text,
+  Image,
+  Icon,
 } from "@chakra-ui/react";
 import { useRoutes } from "../context/RoutesContext";
+import { IoLocationSharp } from "react-icons/io5";
 
 export default function Footprints() {
   const [isShareOpen, setIsShareOpen] = useState(false);
   const { routes, toggleRouteCompletion } = useRoutes();
+
+  // Map the cities to their approximate position on the world map image
+  const cityCoordinates: Record<string, { top: string; left: string }> = {
+    "Madrid": { top: "52%", left: "47%" }, // (Mapped from Spain)
+    "Spain": { top: "52%", left: "47%" },
+    "London": { top: "42%", left: "47%" },
+    "New York": { top: "48%", left: "27%" },
+    "Paris": { top: "45%", left: "48%" },
+  };
+
+  // Extract a unique list of cities from the artworks of all completed routes
+  const completedCities = Array.from(
+    new Set(
+      routes
+        .filter((r) => r.isCompleted)
+        .flatMap((r) => r.artworks?.map((a) => a.city) || [])
+    )
+  );
 
   return (
     <Flex
@@ -153,7 +174,7 @@ export default function Footprints() {
             minH="460px"
             bg="brand.surface"
             borderRadius="lg"
-            p="5"
+           
           >
             <Flex
               h="full"
@@ -165,15 +186,51 @@ export default function Footprints() {
               borderColor="brand.border"
               borderRadius="md"
               bg="brand.bg"
+              overflow="hidden"
+              position="relative"
             >
-              <Box>
-                <Text fontSize="lg" fontWeight="bold">
-                  Map or footprint image area
-                </Text>
-                <Text color="brand.muted" mt="2">
-                  The cultural footprint map will be placed here.
-                </Text>
-              </Box>
+              <Image
+                src="/images/worldMap.png"
+                alt="Cultural footprint map"
+                w="full"
+                h="full"
+                objectFit="cover"
+              />
+              {completedCities.map((city) => {
+                const pos = cityCoordinates[city];
+                if (!pos) return null;
+                
+                return (
+                  <Box
+                    key={city}
+                    position="absolute"
+                    top={pos.top}
+                    left={pos.left}
+                    transform="translate(-50%, -100%)"
+                    zIndex={2}
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="center"
+                  >
+                    <Text
+                      fontSize="xs"
+                      fontWeight="bold"
+                      bg="whiteAlpha.900"
+                      px={1.5}
+                      py={0.5}
+                      borderRadius="md"
+                      shadow="sm"
+                      color="brand.text"
+                    >
+                      {city}
+                    </Text>
+                    <Box position="relative">
+                      <Icon as={IoLocationSharp} boxSize="8" color="red.500" />
+                      <Box position="absolute" top="6px" left="50%" transform="translateX(-50%)" w="2.5" h="2.5" bg="white" borderRadius="full" />
+                    </Box>
+                  </Box>
+                );
+              })}
             </Flex>
           </Box>
         </Flex>
