@@ -12,6 +12,11 @@ interface FilterContextType {
   setShowResults: (val: boolean) => void;
   appliedFilters: string[];
   setAppliedFilters: (val: string[]) => void;
+  searchQuery: string;
+  setSearchQuery: (val: string) => void;
+  appliedSearchQuery: string;
+  setAppliedSearchQuery: (val: string) => void;
+  resetAll: () => void;
 }
 
 const FilterContext = createContext<FilterContextType | undefined>(undefined);
@@ -20,6 +25,8 @@ export function FilterProvider({ children }: { children: ReactNode }) {
   const [selectedFilters, setSelectedFilters] = useState<FilterState>({});
   const [showResults, setShowResults] = useState(false);
   const [appliedFilters, setAppliedFilters] = useState<string[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [appliedSearchQuery, setAppliedSearchQuery] = useState("");
 
   const toggleFilter = (categoryId: string, option: string) => {
     const currentCategory = selectedFilters[categoryId] || [];
@@ -42,8 +49,16 @@ export function FilterProvider({ children }: { children: ReactNode }) {
     setAppliedFilters([]);
   };
 
+  const resetAll = () => {
+    setSelectedFilters({});
+    setShowResults(false);
+    setAppliedFilters([]);
+    setSearchQuery("");
+    setAppliedSearchQuery("");
+  };
+
   return (
-    <FilterContext.Provider value={{ selectedFilters, toggleFilter, clearFilters, showResults, setShowResults, appliedFilters, setAppliedFilters }}>
+    <FilterContext.Provider value={{ selectedFilters, toggleFilter, clearFilters, showResults, setShowResults, appliedFilters, setAppliedFilters, searchQuery, setSearchQuery, appliedSearchQuery, setAppliedSearchQuery, resetAll }}>
       {children}
     </FilterContext.Provider>
   );

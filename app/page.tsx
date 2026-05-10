@@ -42,8 +42,6 @@ export default function Home() {
   const [artworksData, setArtworksData] = useState<{ artworks: Artwork[] }>({
     artworks: [],
   });
-  const [searchQuery, setSearchQuery] = useState("");
-  const [appliedSearchQuery, setAppliedSearchQuery] = useState("");
   const {
     selectedFilters,
     showResults,
@@ -51,6 +49,10 @@ export default function Home() {
     appliedFilters,
     setAppliedFilters,
     clearFilters,
+    searchQuery,
+    setSearchQuery,
+    appliedSearchQuery,
+    setAppliedSearchQuery,
   } = useFilters();
   console.log("appliedSearchQuery", appliedSearchQuery);
 

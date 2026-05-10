@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { useRoutes } from "../context/RoutesContext";
 import { IoLocationSharp } from "react-icons/io5";
+import ShareDialog from "../components/shareDialog";
 
 export default function Footprints() {
   const [isShareOpen, setIsShareOpen] = useState(false);
@@ -237,115 +238,10 @@ export default function Footprints() {
       </Flex>
 
       {/* Share modal */}
-      {isShareOpen && (
-        <Flex
-          position="fixed"
-          inset="0"
-          bg="blackAlpha.600"
-          align="center"
-          justify="center"
-          zIndex="modal"
-          p="6"
-        >
-          <Box
-            bg="brand.surface"
-            borderRadius="lg"
-            w="620px"
-            maxW="90vw"
-            p="6"
-            position="relative"
-            boxShadow="xl"
-          >
-            {/* Close button */}
-            <Button
-              position="absolute"
-              top="4"
-              right="4"
-              variant="ghost"
-              onClick={() => setIsShareOpen(false)}
-              fontSize="xl"
-            >
-              ×
-            </Button>
-
-            <Heading as="h2" fontSize="2xl" fontWeight="bold" mb="5">
-              Share your visit!
-            </Heading>
-
-            <Flex direction="column" align="center" gap="5">
-              {/* Share card preview */}
-              <Box
-                w="340px"
-                maxW="100%"
-                bg="brand.bg"
-                borderWidth="1px"
-                borderColor="brand.border"
-                borderRadius="md"
-                p="4"
-                boxShadow="md"
-              >
-                {/* Image placeholder */}
-                <Flex
-                  h="210px"
-                  align="center"
-                  justify="center"
-                  borderWidth="1px"
-                  borderColor="brand.border"
-                  borderRadius="md"
-                  bg="brand.surface"
-                  textAlign="center"
-                  p="4"
-                >
-                  <Box>
-                    <Text fontWeight="bold">Madrid&apos;s Art Triangle</Text>
-                    <Text fontSize="sm" color="brand.muted" mt="2">
-                      Completed route image / postcard preview
-                    </Text>
-                  </Box>
-                </Flex>
-
-                <Text mt="4" fontSize="sm" lineHeight="1.6">
-                  Even a wandering minstrel must pause to marvel at the visual
-                  masterpieces of Madrid&apos;s Golden Triangle! Just completed
-                  the Paseo del Arte trail, and my creative spirit is absolutely
-                  overflowing.
-                </Text>
-
-                <Text mt="2" fontSize="sm" color="brand.muted">
-                  #Madrid #Spain
-                </Text>
-              </Box>
-
-              {/* Social buttons */}
-              <Flex gap="6" mt="2">
-                <Button
-                  w="52px"
-                  h="52px"
-                  borderRadius="md"
-                  fontSize="2xl"
-                  bg="brand.text"
-                  color="brand.bg"
-                  _hover={{ opacity: 0.85 }}
-                >
-                  f
-                </Button>
-
-                <Button
-                  w="52px"
-                  h="52px"
-                  borderRadius="md"
-                  fontSize="2xl"
-                  bg="brand.text"
-                  color="brand.bg"
-                  _hover={{ opacity: 0.85 }}
-                >
-                  ◎
-                </Button>
-              </Flex>
-            </Flex>
-          </Box>
-        </Flex>
-      )}
+      <ShareDialog
+        isOpen={isShareOpen}
+        onClose={() => setIsShareOpen(false)}
+      />
     </Flex>
   );
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Flex,
   HStack,
@@ -7,8 +9,11 @@ import {
   Container,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
+import { useFilters } from "../context/FilterContext";
 
 export default function Header() {
+  const { resetAll } = useFilters();
+
   return (
     <Box
       as="header"
@@ -23,7 +28,7 @@ export default function Header() {
           {/* 1. Logo / Brand */}
           <Box fontWeight="bold" fontSize="xl" letterSpacing="tight">
             <ChakraLink asChild _hover={{ textDecoration: "none" }}>
-              <NextLink href="/">Arqivea</NextLink>
+              <NextLink href="/" onClick={resetAll}>Arqivea</NextLink>
             </ChakraLink>
           </Box>
 
@@ -34,7 +39,7 @@ export default function Header() {
               asChild
               color="fg.muted"
               _hover={{ color: "fg", textDecoration: "none" }}>
-              <NextLink href="/">Discovery</NextLink>
+              <NextLink href="/" onClick={resetAll}>Discovery</NextLink>
             </ChakraLink>
             <ChakraLink
               asChild
