@@ -5,14 +5,15 @@ export const system = createSystem(defaultConfig, {
     "html, body": {
       backgroundColor: "var(--color-bg-page)",
       color: "var(--color-text-primary)",
-      fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
+      fontFamily: "BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
     },
   },
   theme: {
     tokens: {
       fonts: {
-        heading: { value: "var(--font-geist-sans), system-ui, sans-serif" },
-        body: { value: "var(--font-geist-sans), system-ui, sans-serif" },
+        heading: { value: "BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" },
+        body: { value: "BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" },
+        sans: { value: "BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" },
       },
 
       colors: {

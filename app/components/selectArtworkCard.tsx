@@ -40,7 +40,7 @@ export default function SelectArtworkCard(props: ArtworkCardProps) {
           {tags?.slice(0, 3).map((tag) => (
             <Text
               key={tag}
-              fontSize="xs"
+              fontSize="sm"
               color="brand.muted"
             >
               #{tag}

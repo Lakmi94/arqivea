@@ -6,6 +6,7 @@ import {
   Box,
   Link as ChakraLink,
   Container,
+  Image,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useFilters } from "../context/FilterContext";
@@ -26,8 +27,17 @@ export default function Header() {
         <Flex h="16" alignItems="center" justify="space-between">
           {/* 1. Logo / Brand */}
           <Box fontWeight="bold" fontSize="xl" letterSpacing="tight">
-            <ChakraLink asChild _hover={{ textDecoration: "none" }}>
+            <ChakraLink
+              asChild
+              _hover={{ textDecoration: "none" }}
+              _focus={{ outline: "none" }}>
               <NextLink href="/" onClick={resetAll}>
+                <Image
+                  src="/images/arqivea.png"
+                  alt="Arqivea Logo"
+                  h="10"
+                  objectFit="contain"
+                />
                 Arqivea
               </NextLink>
             </ChakraLink>

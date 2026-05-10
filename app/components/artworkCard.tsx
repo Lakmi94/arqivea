@@ -68,7 +68,7 @@ export default function ArtworkCard(props: ArtworkCardProps) {
             px="2"
             py="1"
             borderRadius="md"
-            fontSize="xs"
+            fontSize="sm"
             fontWeight="bold"
             color="gray.800"
             shadow="sm"

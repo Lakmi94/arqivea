@@ -103,7 +103,7 @@ export default function ArtworkDialog(props: ArtworkDialogProps) {
                 {tags?.map((tag) => (
                   <Box
                     key={tag}
-                    fontSize="xs"
+                    fontSize="sm"
                     borderWidth="1px"
                     borderColor="brand.border"
                     borderRadius="md"

@@ -108,7 +108,6 @@ export default function Home() {
       flex="1"
       align="center"
       bg="brand.bg"
-      fontFamily="sans"
       color="brand.text">
       <Flex direction="column" w="full" maxW="1299px" align="flex-start">
         <Heading as="h1" fontSize="3xl" fontWeight="bold" mt="4">
