@@ -86,7 +86,7 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
         name: routeName || "Untitled Route",
         museums: uniqueMuseums,
         date: visitDate ? visitDate.split('-').reverse().join('/') : "Not set",
-        stopsCount: selectedForNewRoute.length,
+        stopsCount: uniqueMuseums.length,
         artworks: selectedForNewRoute,
       });
       removeSavedArtworks(selectedForNewRoute);
@@ -368,7 +368,7 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
                     <Flex justify="space-between">
                       <Text color="gray.500"># of stops:</Text>
                       <Text color="black" textAlign="right">
-                        {selectedForNewRoute.length}
+                        {uniqueMuseums.length}
                       </Text>
                     </Flex>
                   </Flex>

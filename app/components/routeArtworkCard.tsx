@@ -4,7 +4,7 @@ import { Box, Text, Image } from "@chakra-ui/react";
 import { ArtworkCardProps } from "./artworkCard";
 
 export default function RouteArtworkCard(props: ArtworkCardProps) {
-  const { title, artist, imageUrl, museum, room } = props;
+  const { title, imageUrl, museum, city } = props;
 
   return (
     <Box
@@ -27,7 +27,8 @@ export default function RouteArtworkCard(props: ArtworkCardProps) {
       )}
       <Box p="4">
         <Text fontWeight="bold">{title}</Text>
-        <Text color="brand.muted" fontSize="sm">{museum}</Text>
+        <Text color="brand.muted" fontSize="sm">{museum} - {city}</Text>
+         
       </Box>
     </Box>
   );

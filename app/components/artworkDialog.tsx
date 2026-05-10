@@ -13,6 +13,7 @@ import { IoColorPaletteSharp } from "react-icons/io5";
 import { TbRuler2 } from "react-icons/tb";
 import { IoCalendarNumberOutline } from "react-icons/io5";
 import { useRoutePlanner } from "../context/RoutePlannerContext";
+import { FaCity } from "react-icons/fa";
 
 interface ArtworkDialogProps extends ArtworkCardProps {
   isOpen: boolean;
@@ -27,6 +28,7 @@ export default function ArtworkDialog(props: ArtworkDialogProps) {
     academicNotes,
     imageUrl,
     museum,
+    city,
     room,
     medium,
     artist,
@@ -167,6 +169,18 @@ export default function ArtworkDialog(props: ArtworkDialogProps) {
                     <Text fontWeight="bold">Museum</Text>
                   </Flex>
                   <Text>{museum}</Text>
+                </Flex>
+                 <Flex justify="space-between">
+                  <Flex>
+                    <Icon
+                      as={FaCity}
+                      boxSize="5"
+                      color="brand.muted"
+                      mr="2"
+                    />
+                    <Text fontWeight="bold">City</Text>
+                  </Flex>
+                  <Text>{city}</Text>
                 </Flex>
                 <Flex justify="space-between">
                   <Flex>

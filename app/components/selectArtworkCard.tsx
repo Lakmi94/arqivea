@@ -6,7 +6,7 @@ import { ArtworkCardProps } from "./artworkCard";
 import { useRoutePlanner } from "../context/RoutePlannerContext";
 
 export default function SelectArtworkCard(props: ArtworkCardProps) {
-  const { title, museum, imageUrl, tags } = props;
+  const { title, museum, imageUrl, tags, city } = props;
   
   const { toggleSelectedForNewRoute, isSelectedForNewRoute } = useRoutePlanner();
   const isSelected = isSelectedForNewRoute(title);
@@ -35,7 +35,7 @@ export default function SelectArtworkCard(props: ArtworkCardProps) {
       )}
       <Flex flex="1" direction="column" gap="1">
         <Text fontWeight="bold" fontSize="md" lineHeight="tight">{title}</Text>
-        <Text color="brand.muted" fontSize="sm">{museum}</Text>
+        <Text color="brand.muted" fontSize="sm">{museum} - {city}</Text>
         <Flex gap="2" wrap="wrap" mt="1">
           {tags?.slice(0, 3).map((tag) => (
             <Text

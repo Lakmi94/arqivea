@@ -23,6 +23,7 @@ interface Artwork {
   title: string;
   artist: string;
   museum: string;
+  city: string;
   room: string;
   medium: string;
   displayStatus: string;
@@ -224,6 +225,7 @@ export default function Home() {
                     imageUrl={artwork.imageUrl}
                     recommendationTag={artwork.recommendationTag ?? undefined}
                     museum={artwork.museum}
+                    city={artwork.city}
                     room={artwork.room}
                     medium={artwork.medium}
                     displayStatus={artwork.displayStatus}
@@ -254,6 +256,7 @@ export default function Home() {
                 imageUrl={artwork.imageUrl}
                 recommendationTag={artwork.recommendationTag ?? undefined}
                 museum={artwork.museum}
+                city={artwork.city}
                 room={artwork.room}
                 artist={artwork.artist}
                 medium={artwork.medium}

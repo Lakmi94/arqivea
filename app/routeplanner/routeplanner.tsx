@@ -52,7 +52,6 @@ export default function RoutePlanner() {
               Wishlist Syncing and Museum Routing
             </Text>
             <Text mt="3" color="brand.text">
-              Your routes: 1
               Your routes: {routes.length}
             </Text>
           </Box>
@@ -122,8 +121,8 @@ export default function RoutePlanner() {
                 <Flex w="full" bg="brand.surface" p="4" px="5" borderRadius="lg" borderWidth="1px" borderColor="brand.border" justify="space-between" align="center" mb="4" shrink={0}>
                   <Heading size="md" fontSize="xl">{selectedRoute.name}</Heading>
                   <Flex gap="4" color="brand.muted" fontSize="sm" fontWeight="medium">
-                    <Text>{selectedRoute.museums.length} museum{selectedRoute.museums.length !== 1 ? 's' : ''}</Text>
-                    <Text>{selectedRoute.stopsCount} artwork{selectedRoute.stopsCount !== 1 ? 's' : ''}</Text>
+                    <Text>{selectedRoute.stopsCount} stop{selectedRoute.stopsCount !== 1 ? 's' : ''}</Text>
+                    <Text>{selectedRoute.artworks?.length || 0} artwork{(selectedRoute.artworks?.length || 0) !== 1 ? 's' : ''}</Text>
                     <Flex align="center" gap="1">
                       <Icon as={IoTimeOutline} boxSize="4" />
                       <Text>~2 hrs</Text>
@@ -264,58 +263,6 @@ export default function RoutePlanner() {
             <Box key={index} minW="320px">
               <RouteArtworkCard {...artwork} />
             </Box>
-
-            <Text color="brand.muted" fontWeight="medium">
-              Wishlist: {savedArtworks.length > 0 ? savedArtworks.length : 3}
-            </Text>
-          </Flex>
-
-          {savedArtworks.length > 0 ? (
-            <Flex gap="5" pb="2" w="full" align="stretch">
-              {savedArtworks.map((artwork, index) => (
-                <Box key={index} w="250px" flexShrink={0}>
-                  <RouteArtworkCard {...artwork} />
-                </Box>
-              ))}
-            </Flex>
-          ) : (
-            <Flex gap="5" w="full" align="stretch">
-              {[
-                {
-                  title: "Mona Lisa",
-                  museum: "The Louvre",
-                },
-                {
-                  title: "The Starry Night",
-                  museum: "Museum of Modern Art, New York",
-                },
-                {
-                  title: "Sunflowers (Fourth Version)",
-                  museum: "National Gallery, London",
-                },
-              ].map((artwork) => (
-                <Box
-                  key={artwork.title}
-                  bg="brand.bg"
-                  borderWidth="1px"
-                  borderColor="brand.border"
-                  borderRadius="md"
-                  overflow="hidden"
-                  w="250px"
-                  flexShrink={0}
-                >
-                  <Box h="150px" bg="brand.placeholder" />
-                  <Box p="4">
-                    <Text fontWeight="bold">{artwork.title}</Text>
-                    <Text fontSize="sm" color="brand.muted" mt="1">
-                      {artwork.museum}
-                    </Text>
-                  </Box>
-                </Box>
-              ))}
-            </Flex>
-          )}
-        </Box>
           ))}
         </Flex>
       </Flex>

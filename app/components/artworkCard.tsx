@@ -11,6 +11,7 @@ export interface ArtworkCardProps {
   imageUrl?: string;
   recommendationTag: string | undefined;
   museum: string;
+  city: string;
   room: string;
   medium: string;
   displayStatus: string;
@@ -22,7 +23,7 @@ export interface ArtworkCardProps {
 
 export default function ArtworkCard(props: ArtworkCardProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const { title, academicNotes, artist,imageUrl, recommendationTag, museum, room, medium, displayStatus } = props;
+  const { title, artist, imageUrl, recommendationTag, museum, city, room, medium, displayStatus } = props;
 
   return (
     <>
@@ -99,7 +100,7 @@ export default function ArtworkCard(props: ArtworkCardProps) {
             Museum
           </Text>
           <Text fontSize="sm" color="brand.lightMuted">
-            {museum}
+            {museum}, {city}
           </Text>
         </Flex>
         <Flex p="2" justifyContent="space-between" alignItems="center">
