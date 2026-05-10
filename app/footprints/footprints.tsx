@@ -8,9 +8,11 @@ import {
   Heading,
   Text,
 } from "@chakra-ui/react";
+import { useRoutes } from "../context/RoutesContext";
 
 export default function Footprints() {
   const [isShareOpen, setIsShareOpen] = useState(false);
+  const { routes, toggleRouteCompletion } = useRoutes();
 
   return (
     <Flex
@@ -33,7 +35,7 @@ export default function Footprints() {
             Personal Digital Drawer and Cultural Footprint
           </Text>
           <Text mt="3" color="brand.text">
-            Your routes: 2
+            Your routes: {routes.length}
           </Text>
         </Box>
 
@@ -48,98 +50,100 @@ export default function Footprints() {
             bg="transparent"
           >
             <Flex direction="column" gap="5">
-              {/* Route card 1 */}
-              <Box
-                borderWidth="1px"
-                borderColor="brand.border"
-                borderRadius="md"
-                p="4"
-                bg="brand.surface"
-              >
-                <Flex justify="space-between" align="flex-start" gap="3">
-                  <Box>
-                    <Text fontWeight="bold">Madrid&apos;s Golden Triangle</Text>
-                    <Text fontSize="sm" color="brand.muted" mt="1">
-                      Multiple museums
-                    </Text>
-                  </Box>
+              {routes.length > 0 ? (
+                routes.map((route) => {
+                  const displayMuseums =
+                    route.museums.length > 2
+                      ? "Multiple museums"
+                      : route.museums.length > 0
+                      ? route.museums.join(" • ")
+                      : "None";
 
-                  <Button size="sm" onClick={() => setIsShareOpen(true)}>
-                    Share
-                  </Button>
-                </Flex>
-
-                <Flex
-                  justify="space-between"
-                  align="center"
-                  mt="5"
-                  color="brand.muted"
-                  fontSize="sm"
-                >
-                  <Flex align="center" gap="2">
+                  return (
                     <Box
-                      w="14px"
-                      h="14px"
-                      borderRadius="full"
-                      borderWidth="2px"
-                      borderColor="brand.text"
-                    />
-                    <Text color="brand.text">Mark as done</Text>
-                  </Flex>
-
-                  <Text>13-05-2026</Text>
-                  <Text>3 stops</Text>
-                </Flex>
-              </Box>
-
-              {/* Route card 2 */}
-              <Box
-                borderWidth="1px"
-                borderColor="brand.border"
-                borderRadius="md"
-                p="4"
-                bg="brand.surface"
-                opacity={0.65}
-              >
-                <Flex justify="space-between" align="flex-start" gap="3">
-                  <Box>
-                    <Text fontWeight="bold">Trip to East Asia</Text>
-                    <Text fontSize="sm" color="brand.muted" mt="1">
-                      Multiple museums
-                    </Text>
-                  </Box>
-
-                  <Text fontSize="sm" color="brand.muted">
-                    2 stops
-                  </Text>
-                </Flex>
-
-                <Flex
-                  justify="space-between"
-                  align="center"
-                  mt="5"
-                  color="brand.muted"
-                  fontSize="sm"
-                >
-                  <Flex align="center" gap="2">
-                    <Flex
-                      w="16px"
-                      h="16px"
-                      borderRadius="full"
+                      key={route.id}
                       borderWidth="1px"
-                      borderColor="brand.muted"
-                      align="center"
-                      justify="center"
-                      fontSize="10px"
+                      borderColor="brand.border"
+                      borderRadius="md"
+                      p="4"
+                      bg="brand.surface"
+                      opacity={route.isCompleted ? 0.65 : 1}
                     >
-                      ✓
-                    </Flex>
-                    <Text>Completed</Text>
-                  </Flex>
+                      <Flex justify="space-between" align="flex-start" gap="3">
+                        <Box>
+                          <Text fontWeight="bold">{route.name}</Text>
+                          <Text fontSize="sm" color="brand.muted" mt="1">
+                            {displayMuseums}
+                          </Text>
+                        </Box>
 
-                  <Text>13-12-2025</Text>
-                </Flex>
-              </Box>
+                        {route.isCompleted ? (
+                          <Button size="sm" onClick={() => setIsShareOpen(true)}>
+                            Share
+                          </Button>
+                        ) : (
+                          <Text fontSize="sm" color="brand.muted">
+                            {route.stopsCount} stop{route.stopsCount !== 1 ? "s" : ""}
+                          </Text>
+                        )}
+                      </Flex>
+
+                      <Flex
+                        justify="space-between"
+                        align="center"
+                        mt="5"
+                        color="brand.muted"
+                        fontSize="sm"
+                      >
+                        <Flex
+                          align="center"
+                          gap="2"
+                          cursor="pointer"
+                          onClick={() => toggleRouteCompletion(route.id)}
+                        >
+                          {!route.isCompleted ? (
+                            <>
+                              <Box
+                                w="14px"
+                                h="14px"
+                                borderRadius="full"
+                                borderWidth="2px"
+                                borderColor="brand.text"
+                              />
+                              <Text color="brand.text">Mark as done</Text>
+                            </>
+                          ) : (
+                            <>
+                              <Flex
+                                w="16px"
+                                h="16px"
+                                borderRadius="full"
+                                borderWidth="1px"
+                                borderColor="brand.muted"
+                                align="center"
+                                justify="center"
+                                fontSize="10px"
+                              >
+                                ✓
+                              </Flex>
+                              <Text>Completed</Text>
+                            </>
+                          )}
+                        </Flex>
+
+                        <Text>{route.date}</Text>
+                        {route.isCompleted && (
+                          <Text>
+                            {route.stopsCount} stop{route.stopsCount !== 1 ? "s" : ""}
+                          </Text>
+                        )}
+                      </Flex>
+                    </Box>
+                  );
+                })
+              ) : (
+                <Text color="brand.muted">No routes added yet.</Text>
+              )}
             </Flex>
           </Box>
 
