@@ -37,7 +37,7 @@ export default function RoutePlanner() {
       fontFamily="sans"
       color="brand.text"
     >
-      <Flex maxW="1299px" direction="column" w="full" gap="5">
+      <Flex maxW="1299px" direction="column" w="full" gap="5" px="6">
         {/* Page header */}
         <Flex
           direction={{ base: "column", md: "row" }}
