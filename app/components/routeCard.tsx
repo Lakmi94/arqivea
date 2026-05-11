@@ -29,9 +29,9 @@ export default function RouteCard(props: RouteCardProps) {
       bg="brand.surface"
       p="5"
       shadow="sm"
-      borderColor={isSelected ? "gray.800" : "brand.border"}
+      borderColor={isSelected ? "brand.primary" : "brand.border"}
       w="full"
-      _hover={{ shadow: "md", borderColor: isSelected ? "gray.800" : "gray.400" }}
+      _hover={{ shadow: "md", borderColor: isSelected ? "brand.primaryHover" : "brand.primary" }}
       transition="all 0.2s"
       cursor="pointer"
       role="button"
@@ -66,7 +66,7 @@ export default function RouteCard(props: RouteCardProps) {
               }
             }}
             _hover={{ color: "brand.primary" }}
-            color={isCompleted ? "green.500" : "brand.muted"}
+            color={isCompleted ? "brand.primary" : "brand.muted"}
           >
             <Text fontSize="sm" display={{ base: "none", md: "block" }}>{isCompleted ? "Completed" : "Mark as complete"}</Text>
             <Icon as={isCompleted ? IoCheckmarkCircle : IoEllipseOutline} boxSize="5" />

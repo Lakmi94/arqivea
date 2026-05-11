@@ -121,18 +121,19 @@ export default function ArtworkDialog(props: ArtworkDialogProps) {
                   {artist}
                 </Text>
                 <Button
-                  bg="whiteAlpha.900"
+                  bg={isAddedToRoute ? "brand.primary" : "brand.surface"}
                   backdropFilter="blur(4px)"
                   px="4"
                   py="2"
                   borderRadius="md"
                   borderWidth="1px"
-                  borderColor="brand.border"
+                  borderColor={isAddedToRoute ? "brand.primary" : "brand.border"}
                   fontSize="sm"
                   fontWeight="bold"
-                  color="gray.800"
+                  color={isAddedToRoute ? "brand.primaryText" : "brand.text"}
                   shadow="sm"
-                  onClick={handleToggleRoutePlanner}>
+                  onClick={handleToggleRoutePlanner}
+                  _hover={{ bg: isAddedToRoute ? "brand.primaryHover" : "brand.tertiary" }}>
                   <Icon
                     as={isAddedToRoute ? IoCheckmark : CiBookmark}
                     boxSize="4"

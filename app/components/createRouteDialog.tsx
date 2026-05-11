@@ -436,9 +436,9 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
                   (step === 2 && !showSuggestions && selectedForNewRoute.length === 0) ||
                   (step === 3 && selectedForNewRoute.length === 0)
                 }
-                bg="gray.400" // Kept gray as in your wireframe, change to brand.primary for production
-                color="white" 
-                _hover={{ bg: "gray.500" }} 
+                bg="brand.primary"
+                color="brand.primaryText" 
+                _hover={{ bg: "brand.primaryHover" }} 
                 borderRadius="lg" 
                 px={8}
                 size="lg"

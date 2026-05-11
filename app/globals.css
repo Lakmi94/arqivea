@@ -3,21 +3,21 @@
 :root {
   /* 1. Background & Surface */
   --color-bg-page: #F4F4F2;
-  --color-surface-default: #E8E8E8;
-  --color-surface-soft-warm: #F6F7D3;
+  --color-surface-default: #FFFFFF;
+  --color-surface-soft-warm: #EBDDCC;
   --color-surface-soft-cool: #CAE4DB;
 
   /* 2. Text */
-  --color-text-primary: #333333;
-  --color-text-secondary: #495464;
-  --color-text-strong: #333C4A;
+  --color-text-primary: #3d3326;
+  --color-text-secondary: #736b5e;
+  --color-text-strong: #3d3326;
   --color-text-inverse: #F4F4F2;
-  --color-text-muted: #BBBFCA;
+  --color-text-muted: #a39a8c; 
 
   /* 3. Actions & Functional */
-  --color-action-primary: #495464;
-  --color-action-primary-text: #F4F4F2;
-  --color-action-primary-hover: #3b4451;
+  --color-action-primary: #cdac81;
+  --color-action-primary-text: #3d3326;
+  --color-action-primary-hover: #b5956a;
 
   /* 4. Emotive / Footprint */
   --color-footprint-bg: #CAE4DB;

@@ -114,7 +114,7 @@ export default function Home() {
         <Heading as="h1" fontSize="3xl" fontWeight="bold" mt="4">
           Discovery
         </Heading>
-        <Text mt="4" fontSize="lg" color="brand.muted">
+        <Text mt="4" fontSize="lg" color="brand.text.primary">
           Hyper-search & Academic Gallery
         </Text>
       </Flex>
@@ -131,7 +131,7 @@ export default function Home() {
         align="center"
         w="full"
         maxW="1100px">
-        <Icon size="lg" color="">
+        <Icon size="lg" color="brand.text.primary">
           <CiSearch />
         </Icon>{" "}
         <Input
@@ -164,7 +164,7 @@ export default function Home() {
             variant="outline"
             borderColor="brand.border"
             onClick={handleSearch}>
-            <Icon size="lg" color="">
+            <Icon size="lg" color="brand.text.primary">
               <CiSearch />
             </Icon>
             Search
@@ -174,11 +174,11 @@ export default function Home() {
           px="6"
           py="2"
           bg="brand.primary"
-          color="white"
+          color="brand.primaryText"
           _hover={{ bg: "brand.primaryHover" }}
           transition="colors 0.2s"
           onClick={() => setShowFilters(!showFilters)}>
-          <Icon size="lg" color="">
+          <Icon size="lg" color="brand.text.primary">
             <IoFilterOutline />
           </Icon>
           Filters

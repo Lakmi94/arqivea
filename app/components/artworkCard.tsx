@@ -96,10 +96,12 @@ export default function ArtworkCard(props: ArtworkCardProps) {
         </Box>
         {recommendationTag && (
           <Box
-            borderWidth="1px"
-            borderBlockColor="brand.border"
+            // borderWidth="1px"
+            // borderBlockColor="brand.text.primary"
             borderRadius="md"
-            p="2">
+            bg="brand.tertiary"
+            px="2"
+            py="1">
             <Text>{recommendationTag}</Text>
           </Box>
         )}
@@ -107,7 +109,7 @@ export default function ArtworkCard(props: ArtworkCardProps) {
       </Flex>
       <Flex direction="column" p="2">
         <Flex p="2" justifyContent="space-between" alignItems="center">
-          <Text fontSize="sm" color="brand.lightMuted">
+          <Text fontSize="sm" color="brand.text.primary" fontWeight="bold">
             Museum
           </Text>
           <Text fontSize="sm" color="brand.lightMuted">
@@ -115,7 +117,7 @@ export default function ArtworkCard(props: ArtworkCardProps) {
           </Text>
         </Flex>
         <Flex p="2" justifyContent="space-between" alignItems="center">
-          <Text fontSize="sm" color="brand.lightMuted">
+          <Text fontSize="sm" color="brand.text.primary" fontWeight="bold">
             Room
           </Text>
           <Text fontSize="sm" color="brand.lightMuted">
@@ -123,7 +125,7 @@ export default function ArtworkCard(props: ArtworkCardProps) {
           </Text>
         </Flex>
         <Flex p="2" justifyContent="space-between" alignItems="center">
-          <Text fontSize="sm" color="brand.lightMuted">
+          <Text fontSize="sm" color="brand.text.primary" fontWeight="bold">
           Medium
           </Text>
           <Text fontSize="sm" color="brand.lightMuted">

@@ -37,15 +37,15 @@ export default function Filters({ onApply }: FiltersProps) {
                     key={option}
                     size="sm"
                     bg={isSelected ? "brand.primary" : "brand.surface"}
-                    color={isSelected ? "white" : "brand.text"}
+                    color={isSelected ? "brand.primaryText" : "brand.text"}
                     borderWidth="1px"
                     h={"25px"}
                     borderColor={isSelected ? "brand.primary" : "brand.border"}
                     _hover={{
                       bg: isSelected
                         ? "brand.primaryHover"
-                        : "#ffedd6",
-                        borderColor: isSelected ? "brand.primaryHover" : "#cdac81",
+                        : "brand.tertiary",
+                        borderColor: isSelected ? "brand.primaryHover" : "brand.primary",
                     }}
                     onClick={() => toggleFilter(filter.id, option)}>
                     {option}
