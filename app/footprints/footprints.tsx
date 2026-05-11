@@ -47,7 +47,7 @@ export default function Footprints() {
       color="brand.text"
       position="relative"
     >
-      <Flex maxW="1299px" direction="column" w="full" gap="5">
+      <Flex maxW="1299px" direction="column" w="full" gap="5" px="6">
         {/* Page header */}
         <Box>
           <Heading as="h1" fontSize="3xl" fontWeight="bold">
@@ -99,15 +99,25 @@ export default function Footprints() {
                           </Text>
                         </Box>
 
-                        {route.isCompleted ? (
-                          <Button size="sm" onClick={() => setIsShareOpen(true)}>
-                            Share
-                          </Button>
-                        ) : (
-                          <Text fontSize="sm" color="brand.muted">
-                            {route.stopsCount} stop{route.stopsCount !== 1 ? "s" : ""}
-                          </Text>
-                        )}
+                      {route.isCompleted ? (
+                        <Button
+                          size="sm"
+                          bg="var(--color-highlight-main)" 
+                          color="var(--color-highlight-border)"
+                          transition="all 0.2s ease"
+                          _hover={{
+                            bg: "var(--color-highlight-hover)",
+                            color: "var(--color-highlight-border)",
+                          }}
+                          onClick={() => setIsShareOpen(true)}
+                        >
+                          Share
+                        </Button>
+                      ) : (
+                        <Text fontSize="sm" color="brand.muted">
+                          {route.stopsCount} stop{route.stopsCount !== 1 ? "s" : ""}
+                        </Text>
+                      )}
                       </Flex>
 
                       <Flex

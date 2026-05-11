@@ -19,10 +19,11 @@
   --color-action-primary-text: #F4F4F2;
   --color-action-primary-hover: #3b4451;
 
-  /* 4. Emotive / Footprint */
+  /* 4. Emotive */
   --color-footprint-bg: #CAE4DB;
-  --color-footprint-highlight: #00303F;
-  --color-share-highlight: #CDAC81;
+  --color-highlight-hover: #EBDDCC;
+  --color-highlight-main: #CDAC81;
+  --color-highlight-border: #291A07;
 
   /* 5. Spacing */
   --space-4: 4px;

@@ -110,27 +110,25 @@ export default function Home() {
       bg="brand.bg"
       fontFamily="sans"
       color="brand.text">
-      <Flex direction="column" w="full" maxW="1299px" align="flex-start">
+      <Flex direction="column" w="full" maxW="1299px" px="6" align="flex-start">
         <Heading as="h1" fontSize="3xl" fontWeight="bold" mt="4">
           Discovery
         </Heading>
         <Text mt="4" fontSize="lg" color="brand.muted">
           Hyper-search & Academic Gallery
         </Text>
-      </Flex>
 
-      <Flex
-        mt="8"
-        p="3"
-        px="4"
-        gap="2"
-        borderWidth="1px"
-        borderColor="brand.border"
-        borderRadius="lg"
-        bg="brand.surface"
-        align="center"
-        w="full"
-        maxW="1299px">
+        <Flex
+          mt="8"
+          p="3"
+          px="4"
+          gap="2"
+          borderWidth="1px"
+          borderColor="brand.border"
+          borderRadius="lg"
+          bg="brand.surface"
+          align="center"
+          w="full">
         <Icon size="lg" color="">
           <CiSearch />
         </Icon>{" "}
@@ -185,7 +183,7 @@ export default function Home() {
         </Button>
       </Flex>
       {showFilters && (
-        <Box w="full" maxW="1299px" mt="4">
+        <Box w="full" maxW="1299px" mt="3">
           <Filters
             onApply={() => {
               setSearchQuery(""); // Clears search bar text
@@ -205,14 +203,14 @@ export default function Home() {
       )}
       {!showResults ||
       (appliedFilters.length === 0 && appliedSearchQuery.trim() === "") ? (
-        <Flex direction={"column"} w="full" maxW="1299px" align="flex-start" mt="10">
-          <Text fontSize="lg" color="brand.muted" mb="6">
+        <Flex direction={"column"} w="full" maxW="1299px" align="flex-start" mt="3">
+          <Text fontSize="lg" color="brand.muted" mb="3">
             Recommended artwork
           </Text>
           <SimpleGrid
             columns={{ base: 1, md: 2, lg: 3 }}
             gap={6}
-            mt="4"
+            mt="0"
             w="full"
             maxW="1299px"
             position={"relative"}>
@@ -241,12 +239,12 @@ export default function Home() {
           </SimpleGrid>
         </Flex>
       ) : isSpainAndModern || isSpanishModernSearch ? (
-        <Flex direction="column" w="full" maxW="1299px" align="flex-start">
+        <Flex direction="column" w="full" maxW="1299px" align="flex-start" mt="3">
           <Text>{`${spainAndModernArtworks.length} results found for "Spain" + "Modernism"`}</Text>
           <SimpleGrid
             columns={{ base: 1, md: 2, lg: 3 }}
             gap={6}
-            mt="12"
+            mt="3"
             w="full"
             maxW="1299px"
             position={"relative"}>
@@ -272,7 +270,7 @@ export default function Home() {
           </SimpleGrid>
         </Flex>
       ) : (
-        <Flex mt="8" w="full" maxW="1299px" align="flex-start">
+        <Flex mt="3" w="full" maxW="1299px" align="flex-start">
           <Text fontSize="md" color="brand.muted">
             {appliedSearchQuery.trim().length > 0
               ? `No results found for "${appliedSearchQuery}"`
@@ -281,5 +279,6 @@ export default function Home() {
         </Flex>
       )}
     </Flex>
+  </Flex>
   );
 }
