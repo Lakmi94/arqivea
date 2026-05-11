@@ -64,13 +64,23 @@ export default function Home() {
     appliedFilters.includes("Spain") &&
     appliedFilters.includes("Modern");
 
+    const isSpainModernAndDisplay = appliedFilters.length === 3 &&
+    appliedFilters.includes("Spain") &&
+    appliedFilters.includes("Modern") &&
+    appliedFilters.includes("On Display");
+
   const isSpanishModernSearch =
     appliedSearchQuery.toLowerCase().trim() === "spanish modernism";
 
   const spainAndModernArtworks = artworksData.artworks
     .filter((artwork) => {
       const artworkText = JSON.stringify(artwork).toLowerCase();
-      return artworkText.includes("spain") && artworkText.includes("modern");
+      const hasSpainAndModern = artworkText.includes("spain") && artworkText.includes("modern");
+
+      if (isSpainModernAndDisplay) {
+        return hasSpainAndModern && artwork.displayStatus === "On display";
+      }
+      return hasSpainAndModern;
     })
     .slice(0, 6);
 
@@ -135,6 +145,8 @@ export default function Home() {
         <Input
           ml="-13px"
           id="search"
+          color="brand.primaryText"
+          _placeholder={{ color: "brand.muted" }}
           type="text"
           placeholder="Search for artworks, artists, museums, or vibes..."
           flex="1"
@@ -245,9 +257,15 @@ export default function Home() {
             )}
           </SimpleGrid>
         </Flex>
-      ) : isSpainAndModern || isSpanishModernSearch ? (
+      ) : isSpainAndModern || isSpanishModernSearch || isSpainModernAndDisplay ? (
         <Flex direction="column" w="full" maxW="1200px" align="flex-start">
-          <Text>{`${spainAndModernArtworks.length} results found for "Spain" + "Modernism"`}</Text>
+          <Text>{`${spainAndModernArtworks.length} results found for ${
+            isSpanishModernSearch
+              ? '"Spanish Modernism"'
+              : isSpainModernAndDisplay
+              ? '"Spain" + "Modern" + "On Display"'
+              : '"Spain" + "Modern"'
+          }`}</Text>
           <SimpleGrid
             columns={{ base: 1, md: 2, lg: 3 }}
             gap={6}
