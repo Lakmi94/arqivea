@@ -6,7 +6,7 @@ import { ArtworkCardProps } from "./artworkCard";
 import { useRoutePlanner } from "../context/RoutePlannerContext";
 
 export default function RouteArtworkCard(props: ArtworkCardProps) {
-  const { title, imageUrl, museum, city } = props;
+  const { title, imageUrl, museum, city, imagePosition } = props;
   const { toggleSavedArtwork } = useRoutePlanner();
 
   return (
@@ -49,6 +49,7 @@ export default function RouteArtworkCard(props: ArtworkCardProps) {
           h={48}
           w="full"
           objectFit="cover"
+          objectPosition={imagePosition || "top"}
         />
       ) : (
         <Box h={48} bg="brand.placeholder" />

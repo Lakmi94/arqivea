@@ -19,11 +19,12 @@ export interface ArtworkCardProps {
   year: string;
   dimensions: string;
   tags: string[];
+  imagePosition?: string;
 }
 
 export default function ArtworkCard(props: ArtworkCardProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const { title, artist, imageUrl, recommendationTag, museum, city, room, medium, displayStatus } = props;
+  const { title, artist, imageUrl, recommendationTag, museum, city, room, medium, displayStatus, imagePosition } = props;
 
   return (
     <>
@@ -51,12 +52,13 @@ export default function ArtworkCard(props: ArtworkCardProps) {
           <Image
             src={`./images/${imageUrl}`}
             alt={title}
-            h={80}
+            h={64}
             w="full"
             objectFit="cover"
+            objectPosition={imagePosition || "top"}
           />
         ) : (
-          <Box h="48" bg="brand.placeholder" />
+          <Box h={56} bg="brand.placeholder" />
         )}
         {displayStatus && (
           <Box
@@ -109,7 +111,7 @@ export default function ArtworkCard(props: ArtworkCardProps) {
             Museum
           </Text>
           <Text fontSize="sm" color="brand.lightMuted">
-            {museum}, {city}
+            {museum}
           </Text>
         </Flex>
         <Flex p="2" justifyContent="space-between" alignItems="center">

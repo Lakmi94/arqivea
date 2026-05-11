@@ -16,7 +16,7 @@ export default function Filters({ onApply }: FiltersProps) {
   return (
     <Flex
       w="full"
-      maxW="1299px"
+      maxW="1100px"
       p="4"
       bg="brand.surface"
       borderWidth="1px"
@@ -44,7 +44,8 @@ export default function Filters({ onApply }: FiltersProps) {
                     _hover={{
                       bg: isSelected
                         ? "brand.primaryHover"
-                        : "brand.placeholder",
+                        : "#ffedd6",
+                        borderColor: isSelected ? "brand.primaryHover" : "#cdac81",
                     }}
                     onClick={() => toggleFilter(filter.id, option)}>
                     {option}

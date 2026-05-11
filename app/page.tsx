@@ -35,6 +35,7 @@ interface Artwork {
   year: string;
   dimensions: string;
   tags: string[];
+  imagePosition?: string;
 }
 
 export default function Home() {
@@ -109,7 +110,7 @@ export default function Home() {
       align="center"
       bg="brand.bg"
       color="brand.text">
-      <Flex direction="column" w="full" maxW="1299px" align="flex-start">
+      <Flex direction="column" w="full" maxW="1100px" align="flex-start">
         <Heading as="h1" fontSize="3xl" fontWeight="bold" mt="4">
           Discovery
         </Heading>
@@ -129,7 +130,7 @@ export default function Home() {
         bg="brand.surface"
         align="center"
         w="full"
-        maxW="1299px">
+        maxW="1100px">
         <Icon size="lg" color="">
           <CiSearch />
         </Icon>{" "}
@@ -184,7 +185,7 @@ export default function Home() {
         </Button>
       </Flex>
       {showFilters && (
-        <Box w="full" maxW="1299px" mt="4">
+        <Box w="full" maxW="1100px" mt="4">
           <Filters
             onApply={() => {
               setSearchQuery(""); // Clears search bar text
@@ -204,7 +205,7 @@ export default function Home() {
       )}
       {!showResults ||
       (appliedFilters.length === 0 && appliedSearchQuery.trim() === "") ? (
-        <Flex direction={"column"} w="full" maxW="1299px" align="flex-start" mt="10">
+        <Flex direction={"column"} w="full" maxW="1100px" align="flex-start" mt="10">
           <Text fontSize="lg" color="brand.muted" mb="6">
             Recommended artwork
           </Text>
@@ -213,7 +214,7 @@ export default function Home() {
             gap={6}
             mt="4"
             w="full"
-            maxW="1299px"
+            maxW="1100px"
             position={"relative"}>
             {artworksData.artworks.map(
               (artwork) =>
@@ -234,20 +235,21 @@ export default function Home() {
                     year={artwork.year}
                     dimensions={artwork.dimensions}
                     tags={artwork.tags}
+                    imagePosition={artwork.imagePosition}
                   />
                 ),
             )}
           </SimpleGrid>
         </Flex>
       ) : isSpainAndModern || isSpanishModernSearch ? (
-        <Flex direction="column" w="full" maxW="1299px" align="flex-start">
+        <Flex direction="column" w="full" maxW="1100px" align="flex-start">
           <Text>{`${spainAndModernArtworks.length} results found for "Spain" + "Modernism"`}</Text>
           <SimpleGrid
             columns={{ base: 1, md: 2, lg: 3 }}
             gap={6}
             mt="12"
             w="full"
-            maxW="1299px"
+            maxW="1100px"
             position={"relative"}>
             {spainAndModernArtworks.map((artwork) => (
               <ArtworkCard
@@ -266,12 +268,13 @@ export default function Home() {
                 year={artwork.year}
                 dimensions={artwork.dimensions}
                 tags={artwork.tags}
+                imagePosition={artwork.imagePosition}
               />
             ))}
           </SimpleGrid>
         </Flex>
       ) : (
-        <Flex mt="8" w="full" maxW="1299px" align="flex-start">
+        <Flex mt="8" w="full" maxW="1100px" align="flex-start">
           <Text fontSize="md" color="brand.muted">
             {appliedSearchQuery.trim().length > 0
               ? `No results found for "${appliedSearchQuery}"`

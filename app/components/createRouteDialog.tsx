@@ -126,7 +126,7 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
           color="brand.text"
           borderRadius="xl"
           minW="500px"
-          h="650px"
+          h="700px"
           display="flex"
           flexDir="column"
           shadow="2xl"
