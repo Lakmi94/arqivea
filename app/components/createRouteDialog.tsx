@@ -149,24 +149,24 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
           </Dialog.Header>
 
           {/* Stepper Status Bar */}
-          <Box borderTopWidth="1px" borderBottomWidth="1px" borderColor="brand.border" px={8} py={3} bg="white">
+          <Box borderTopWidth="1px" borderBottomWidth="1px" borderColor="brand.border" px={8} py={3} bg="brand.surface">
             <Flex align="center" gap={4}>
               {steps.map((label, index) => {
                 const stepNum = index + 1;
                 const isActive = step === stepNum;
                 const isPast = step > stepNum;
-                // Active or past steps get the dark styling, future steps are gray
+                // Active or past steps get the primary styling, future steps use tertiary
                 const isHighlighted = isActive || isPast; 
 
                 return (
                   <Flex key={label} align="center" gap={4}>
-                    <Flex align="center" gap={2} color={isHighlighted ? "black" : "gray.400"}>
+                    <Flex align="center" gap={2} color={isHighlighted ? "brand.primaryText" : "brand.muted"}>
                       <Flex
                         w={6}
                         h={6}
                         borderRadius="full"
-                        bg={isHighlighted ? "black" : "gray.300"}
-                        color="white"
+                        bg={isHighlighted ? "brand.primary" : "brand.tertiary"}
+                        color={isHighlighted ? "brand.primaryText" : "brand.muted"}
                         align="center"
                         justify="center"
                         fontSize="sm"
@@ -178,7 +178,7 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
                     </Flex>
                     {/* Add separator except for the last item */}
                     {index < steps.length - 1 && (
-                      <Icon as={IoChevronForward} color="gray.300" />
+                      <Icon as={IoChevronForward} color="brand.border" />
                     )}
                   </Flex>
                 );
