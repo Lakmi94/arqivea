@@ -135,7 +135,7 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
         >
           {/* Close Button */}
           <Dialog.CloseTrigger position="absolute" top="4" right="4" cursor="pointer" zIndex={10}>
-            <Icon as={IoClose} boxSize="6" color="gray.400" _hover={{ color: "gray.600" }} />
+            <Icon as={IoClose} boxSize="6" color="brand.muted" _hover={{ color: "brand.primaryText" }} />
           </Dialog.CloseTrigger>
 
           {/* Header */}
@@ -160,13 +160,13 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
 
                 return (
                   <Flex key={label} align="center" gap={4}>
-                    <Flex align="center" gap={2} color={isHighlighted ? "brand.primaryText" : "brand.muted"}>
+                    <Flex align="center" gap={2} color={isHighlighted ? "brand.primaryText" : "#332f2a"}>
                       <Flex
                         w={6}
                         h={6}
                         borderRadius="full"
                         bg={isHighlighted ? "brand.primary" : "brand.tertiary"}
-                        color={isHighlighted ? "brand.primaryText" : "brand.muted"}
+                        color={isHighlighted ? "brand.primaryText" : "#332f2a"}
                         align="center"
                         justify="center"
                         fontSize="sm"
@@ -192,11 +192,11 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
               <Flex flexDir="column" gap={5}>
                 <Box>
                   <label htmlFor="routeName">
-                    <Text display="block" mb="2" color="gray.500">Route name *</Text>
+                    <Text display="block" mb="2" color="brand.primaryText">Route name *</Text>
                   </label>
                   <Input
                     id="routeName"
-                    borderColor="gray.300"
+                    borderColor="brand.muted"
                     borderRadius="md"
                     size="lg"
                     value={routeName}
@@ -205,11 +205,11 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
                 </Box>
                 <Box>
                   <label htmlFor="routeDescription">
-                    <Text display="block" mb="2" color="gray.500">Route description *</Text>
+                    <Text display="block" mb="2" color="brand.primaryText">Route description *</Text>
                   </label>
                   <Textarea
                     id="routeDescription"
-                    borderColor="gray.300"
+                    borderColor="brand.muted"
                     borderRadius="md"
                     size="lg"
                     rows={2}
@@ -233,7 +233,7 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
                     <DatePicker.Control>
                       <DatePicker.Input
                         placeholder="DD/MM/YYYY"
-                        borderColor="gray.300"
+                        borderColor="brand.muted"
                         borderRadius="md"
                         // size="lg"
                       />
@@ -264,7 +264,7 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
                   </DatePicker.Root>
                 </Box>
                 <Box>
-                  <Text display="block" mb="2" color="gray.500">Route duration *</Text>
+                  <Text display="block" mb="2" color="brand.primaryText">Route duration *</Text>
                   <Flex gap={4}>
                     <Flex align="center" gap={2} flex={1}>
                       <Input
@@ -272,13 +272,13 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
                         type="number"
                         placeholder="0"
                         min={0}
-                        borderColor="gray.300"
+                        borderColor="brand.muted"
                         borderRadius="md"
                         size="lg"
                         value={durationHours}
                         onChange={(e) => setDurationHours(e.target.value)}
                       />
-                      <Text color="gray.500">hrs</Text>
+                      <Text color="brand.primaryText">hrs</Text>
                     </Flex>
                     <Flex align="center" gap={2} flex={1}>
                       <Input
@@ -287,17 +287,17 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
                         placeholder="00"
                         min={0}
                         max={59}
-                        borderColor="gray.300"
+                        borderColor="brand.muted"
                         borderRadius="md"
                         size="lg"
                         value={durationMinutes}
                         onChange={(e) => setDurationMinutes(e.target.value)}
                       />
-                      <Text color="gray.500">mins</Text>
+                      <Text color="brand.primaryText">mins</Text>
                     </Flex>
                   </Flex>
                 </Box>
-                <Text fontSize="sm" color="gray.400" mt={-2}>* Required fields</Text>
+                <Text fontSize="sm" color="brand.muted" mt={-2}>* Required fields</Text>
               </Flex>
             )}
 
@@ -359,30 +359,34 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
                 <Box bg="gray.50" borderRadius="lg" p={5} borderWidth="1px" borderColor="brand.border">
                   <Flex direction="column" gap={3} fontSize="md">
                     <Flex justify="space-between">
-                      <Text color="gray.500">Route name:</Text>
-                      <Text color="black" textAlign="right">{routeName || "Untitled Route"}</Text>
+                      <Text color="brand.muted">Route name:</Text>
+                      <Text color="brand.primaryText" textAlign="right">{routeName || "Untitled Route"}</Text>
                     </Flex>
                     <Flex justify="space-between">
-                      <Text color="gray.500">Museums:</Text>
-                      <Text color="black" textAlign="right">
-                        {uniqueMuseums.length > 0 ? "• " + uniqueMuseums.join(" • ") : "None"}
-                      </Text>
+                      <Text color="brand.muted">Museums:</Text>
+                      <Flex direction="column" align="flex-end">
+                        {uniqueMuseums.length > 0
+                          ? uniqueMuseums.map((museum) => (
+                              <Text key={museum} color="brand.primaryText" textAlign="right">{museum}</Text>
+                            ))
+                          : <Text color="brand.primaryText" textAlign="right">None</Text>}
+                      </Flex>
                     </Flex>
                     <Flex justify="space-between">
-                      <Text color="gray.500">Date:</Text>
-                      <Text color="black" textAlign="right">
+                      <Text color="brand.muted">Date:</Text>
+                      <Text color="brand.primaryText" textAlign="right">
                         {visitDate ? visitDate.split('-').reverse().join('/') : "Not set"}
                       </Text>
                     </Flex>
                     <Flex justify="space-between">
-                      <Text color="gray.500">Durations:</Text>
-                      <Text color="black" textAlign="right">
+                      <Text color="brand.muted">Durations:</Text>
+                      <Text color="brand.primaryText" textAlign="right">
                         {durationHours || 0} hours {durationMinutes || 0} minutes
                       </Text>
                     </Flex>
                     <Flex justify="space-between">
-                      <Text color="gray.500"># of stops:</Text>
-                      <Text color="black" textAlign="right">
+                      <Text color="brand.muted"># of stops:</Text>
+                      <Text color="brand.primaryText" textAlign="right">
                         {uniqueMuseums.length}
                       </Text>
                     </Flex>
@@ -391,7 +395,7 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
 
                 {/* Planned Sequence */}
                 <Box>
-                  <Text color="gray.500" mb={2}>Planned sequence</Text>
+                  <Text color="brand.muted" mb={2}>Planned sequence</Text>
                   <Flex
                     flexDir="column"
                     maxH="200px"
@@ -403,11 +407,11 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
                   >
                     {selectedForNewRoute.length > 0 ? selectedForNewRoute.map((artwork, index) => (
                       <Flex key={index} justify="space-between" py={3} borderBottomWidth={index !== selectedForNewRoute.length - 1 ? "1px" : "0"} borderColor="gray.200">
-                        <Text color="black">{index + 1}. {artwork.title}</Text>
-                        <Text color="gray.400">Room {artwork.room}</Text>
+                        <Text color="brand.primaryText">{index + 1}. {artwork.title}</Text>
+                        <Text color="brand.muted">Room {artwork.room}</Text>
                       </Flex>
                     )) : (
-                       <Text color="gray.500" fontStyle="italic">No artworks selected for this route.</Text>
+                       <Text color="brand.muted" fontStyle="italic">No artworks selected for this route.</Text>
                     )}
                   </Flex>
                 </Box>
@@ -416,7 +420,7 @@ export default function CreateRouteDialog({ isOpen, onClose }: CreateRouteDialog
           </Dialog.Body>
 
           {/* Footer */}
-          <Box borderTopWidth="1px" borderColor="gray.200" px={8} py={5} bg="white">
+          <Box borderTopWidth="1px" borderColor="brand.border" px={8} py={5} bg="white">
             <Flex justify="space-between">
               <Button 
                 onClick={handleCancel} 

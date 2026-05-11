@@ -81,7 +81,7 @@ export default function RouteCard(props: RouteCardProps) {
             
             _hover={{ color: "#806b50", transform: "translateY(-2px)",
                        }}
-            color={"#806b50"}
+            color={"#b5956a"}
           >
             <Text fontSize="sm" display={{ base: "none", md: "block" }}>{isCompleted ? "Completed" : "Mark as complete"}</Text>
             <Icon as={isCompleted ? IoCheckmarkCircle : IoEllipseOutline} boxSize="5" />
