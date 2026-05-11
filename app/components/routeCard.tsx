@@ -49,14 +49,14 @@ export default function RouteCard(props: RouteCardProps) {
       <Flex justify="space-between" align="flex-end">
         <Flex direction="column" gap="2" color="gray.600" fontSize="sm">
           <Flex align="flex-start" gap="2">
-            <Icon as={MdOutlineMuseum} boxSize="4" mt={0.5} />
-            <Text>{displayMuseums}</Text>
+            <Icon as={MdOutlineMuseum} boxSize="4" mt={0.5} color="brand.primaryText" />
+            <Text color="brand.primaryText">{displayMuseums}</Text>
           </Flex>
           <Flex align="center" gap="1">
             <Icon as={LuCalendar} boxSize="4" />
-            <Text mr="13px">{date}</Text>
+            <Text mr="13px" color="brand.primaryText">{date}</Text>
            
-            <Text>  •  {stopsCount} stop{stopsCount !== 1 ? "s" : ""}</Text>
+            <Text color="brand.primaryText">  •  {stopsCount} stop{stopsCount !== 1 ? "s" : ""}</Text>
           </Flex>
         </Flex>
         <Flex align="center" gap="4">
@@ -77,8 +77,11 @@ export default function RouteCard(props: RouteCardProps) {
                 toggleRouteCompletion(id);
               }
             }}
-            _hover={{ color: "brand.primary" }}
-            color={isCompleted ? "brand.primary" : "brand.muted"}
+            transition="all 0.2s ease"
+            
+            _hover={{ color: "#806b50", transform: "translateY(-2px)",
+                       }}
+            color={"#806b50"}
           >
             <Text fontSize="sm" display={{ base: "none", md: "block" }}>{isCompleted ? "Completed" : "Mark as complete"}</Text>
             <Icon as={isCompleted ? IoCheckmarkCircle : IoEllipseOutline} boxSize="5" />

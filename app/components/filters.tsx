@@ -16,7 +16,7 @@ export default function Filters({ onApply }: FiltersProps) {
   return (
     <Flex
       w="full"
-      maxW="1100px"
+      maxW="1200px"
       p="4"
       bg="brand.surface"
       borderWidth="1px"

@@ -110,7 +110,7 @@ export default function Home() {
       align="center"
       bg="brand.bg"
       color="brand.text">
-      <Flex direction="column" w="full" maxW="1299px" px="6" align="flex-start">
+      <Flex direction="column" w="full" maxW="1200px" px="6" align="flex-start">
         <Heading as="h1" fontSize="3xl" fontWeight="bold" mt="4">
           Discovery
         </Heading>
@@ -160,7 +160,11 @@ export default function Home() {
             py="2"
             mr="2"
             variant="outline"
-            borderColor="brand.border"
+              bg="brand.placeholder"
+           borderWidth="1px"
+               borderColor="brand.border"
+          color="brand.primaryText"
+         _hover={{ bg: "brand.primary" }}
             onClick={handleSearch}>
             <Icon size="lg" color="brand.text.primary">
               <CiSearch />
@@ -171,9 +175,11 @@ export default function Home() {
         <Button
           px="6"
           py="2"
-          bg="brand.primary"
+          bg="brand.placeholder"
+           borderWidth="1px"
+               borderColor="brand.border"
           color="brand.primaryText"
-          _hover={{ bg: "brand.primaryHover" }}
+         _hover={{ bg: "brand.primary" }}
           transition="colors 0.2s"
           onClick={() => setShowFilters(!showFilters)}>
           <Icon size="lg" color="brand.text.primary">
@@ -183,7 +189,7 @@ export default function Home() {
         </Button>
       </Flex>
       {showFilters && (
-        <Box w="full" maxW="1100px" mt="4">
+        <Box w="full" maxW="1200px" mt="4">
           <Filters
             onApply={() => {
               setSearchQuery(""); // Clears search bar text
@@ -203,7 +209,7 @@ export default function Home() {
       )}
       {!showResults ||
       (appliedFilters.length === 0 && appliedSearchQuery.trim() === "") ? (
-        <Flex direction={"column"} w="full" maxW="1299px" align="flex-start" mt="3">
+        <Flex direction={"column"} w="full" maxW="1200px" align="flex-start" mt="3">
           <Text fontSize="lg" color="brand.muted" mb="3">
             Recommended artwork
           </Text>
@@ -212,7 +218,7 @@ export default function Home() {
             gap={6}
             mt="0"
             w="full"
-            maxW="1100px"
+            maxW="1200px"
             position={"relative"}>
             {artworksData.artworks.map(
               (artwork) =>
@@ -240,14 +246,14 @@ export default function Home() {
           </SimpleGrid>
         </Flex>
       ) : isSpainAndModern || isSpanishModernSearch ? (
-        <Flex direction="column" w="full" maxW="1100px" align="flex-start">
+        <Flex direction="column" w="full" maxW="1200px" align="flex-start">
           <Text>{`${spainAndModernArtworks.length} results found for "Spain" + "Modernism"`}</Text>
           <SimpleGrid
             columns={{ base: 1, md: 2, lg: 3 }}
             gap={6}
             mt="3"
             w="full"
-            maxW="1100px"
+            maxW="1200px"
             position={"relative"}>
             {spainAndModernArtworks.map((artwork) => (
               <ArtworkCard
@@ -272,7 +278,7 @@ export default function Home() {
           </SimpleGrid>
         </Flex>
       ) : (
-        <Flex mt="8" w="full" maxW="1100px" align="flex-start">
+        <Flex mt="8" w="full" maxW="1200px" align="flex-start">
           <Text fontSize="md" color="brand.muted">
             {appliedSearchQuery.trim().length > 0
               ? `No results found for "${appliedSearchQuery}"`

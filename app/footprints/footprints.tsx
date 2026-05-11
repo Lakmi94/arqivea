@@ -68,7 +68,6 @@ export default function Footprints() {
             w="370px"
             flexShrink={0}
             minH="460px"
-            p="5"
             bg="transparent"
           >
             <Flex direction="column" gap="5">
