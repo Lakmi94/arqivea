@@ -41,11 +41,14 @@ export default function Filters({ onApply }: FiltersProps) {
                     borderWidth="1px"
                     h={"25px"}
                     borderColor={isSelected ? "brand.primary" : "brand.border"}
+                    transition="all 0.2s ease"
                     _hover={{
                       bg: isSelected
                         ? "brand.primaryHover"
                         : "brand.tertiary",
-                        borderColor: isSelected ? "brand.primaryHover" : "brand.primary",
+                      borderColor: isSelected ? "brand.primaryHover" : "brand.primary",
+                      transform: "translateY(-2px)",
+                      shadow: "md",
                     }}
                     onClick={() => toggleFilter(filter.id, option)}>
                     {option}

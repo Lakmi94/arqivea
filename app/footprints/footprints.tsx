@@ -132,7 +132,7 @@ export default function Footprints() {
                                 borderWidth="2px"
                                 borderColor="brand.text"
                               />
-                              <Text color="brand.text">Mark as done</Text>
+                              <Text color="brand.text">Mark as completed</Text>
                             </>
                           ) : (
                             <>

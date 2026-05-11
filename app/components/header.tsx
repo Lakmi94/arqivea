@@ -82,7 +82,7 @@ export default function Header() {
               justifyContent="center"
               borderRadius="md"
               transition="all 0.2s"
-              _hover={{ color: pathname === "/routeplanner" ? "#3d3326" : "brand.text", textDecoration: "none", bg: "#ffedd6" }}
+              _hover={{ color: pathname === "/routeplanner" ? "#3d3326" : "brand.text", textDecoration: "none", bg: "#EBDDCC" }}
               _focus={{outline:'none'}}>
               <NextLink href="/routeplanner">
                 <Icon as={FaRegMap} boxSize="5" mr="2" />
@@ -100,7 +100,7 @@ export default function Header() {
               justifyContent="center"
               borderRadius="md"
               transition="all 0.2s"
-              _hover={{ color: pathname === "/footprints" ? "#3d3326" : "brand.text", textDecoration: "none", bg: "#ffedd6" }}
+              _hover={{ color: pathname === "/footprints" ? "#3d3326" : "brand.text", textDecoration: "none", bg: "#EBDDCC" }}
               _focus={{outline:'none'}}>
               <NextLink href="/footprints">
                 <Icon as={RiFootprintLine} boxSize="5" mr="2" />
